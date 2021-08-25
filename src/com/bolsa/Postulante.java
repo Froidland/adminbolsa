@@ -3,6 +3,7 @@ package com.bolsa;
 import java.util.ArrayList;
 
 public class Postulante {
+    //TODO: Cambiar edad a fecha de nacimiento.
     private String nombre;
     private int edad;
     private String rut;
@@ -65,5 +66,14 @@ public class Postulante {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public void mostrarPostulante() {
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Edad: " + this.edad);
+        System.out.println("Rut: " + this.rut);
+        System.out.println("Direccion: " + this.direccion);
+        System.out.println("Correo: " + this.correo);
+        System.out.println("Telefono: " + this.telefono);
     }
 }
