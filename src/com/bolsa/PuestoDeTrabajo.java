@@ -3,15 +3,16 @@ package com.bolsa;
 import java.util.ArrayList;
 
 public class PuestoDeTrabajo {
+    //TODO: Implementar metodo añadirPostulante().
     private int id;
     private String nombre;
     private int sueldoBase;
     private int vacantes;
     private boolean disponible;
-    private ArrayList<Requisitos> requisitos;
+    private ArrayList<Requisito> requisitos;
     private ArrayList<Postulante> postulantes;
 
-    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponible, ArrayList<Requisitos> requisitos, ArrayList<Postulante> postulantes) {
+    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponible, ArrayList<Requisito> requisitos, ArrayList<Postulante> postulantes) {
         this.id = id;
         this.nombre = nombre;
         this.sueldoBase = sueldoBase;
@@ -53,11 +54,11 @@ public class PuestoDeTrabajo {
         this.vacantes = vacantes;
     }
 
-    public ArrayList<Requisitos> getRequisitos() {
+    public ArrayList<Requisito> getRequisitos() {
         return requisitos;
     }
 
-    public void setRequisitos(ArrayList<Requisitos> requisitos) {
+    public void setRequisitos(ArrayList<Requisito> requisitos) {
         this.requisitos = requisitos;
     }
 
@@ -98,17 +99,16 @@ public class PuestoDeTrabajo {
     }
 
     public void mostrarRequisitos() {
-        int i = 1;
-        System.out.println("###   Requisitos   ###");
+        System.out.println("Requisitos: ");
 
         if (this.requisitos.isEmpty()) {
-            System.out.println("Ninguno.");
+            System.out.println("- Ninguno.");
             System.out.println();
             return;
         }
 
-        for (Requisitos requisito : this.requisitos) {
-            System.out.println("Requisito " + i + ": " + requisito);
+        for (Requisito requisito : this.requisitos) {
+            System.out.println("- " + requisito);
         }
 
         System.out.println();
@@ -119,12 +119,7 @@ public class PuestoDeTrabajo {
 
         for (Postulante postulanteActual : this.postulantes) {
             System.out.println("###   Postulante N°" + i + "   ###");
-            System.out.println("Nombre: " + postulanteActual.getNombre());
-            System.out.println("Edad: " + postulanteActual.getEdad());
-            System.out.println("Rut: " + postulanteActual.getRut());
-            System.out.println("Direccion: " + postulanteActual.getDireccion());
-            System.out.println("Correo: " + postulanteActual.getCorreo());
-            System.out.println("Telefono: " + postulanteActual.getTelefono());
+            postulanteActual.mostrarPostulante();
             System.out.println();
             i++;
         }

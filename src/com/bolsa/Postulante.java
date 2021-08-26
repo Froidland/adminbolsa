@@ -10,14 +10,16 @@ public class Postulante {
     private String direccion;
     private String correo;
     private String telefono;
+    private ArrayList<Competencia> competencias;
 
-    public Postulante(String nombre, int edad, String rut, String direccion, String correo, String telefono) {
+    public Postulante(String nombre, int edad, String rut, String direccion, String correo, String telefono, ArrayList<Competencia> competencias) {
         this.nombre = nombre;
         this.edad = edad;
         this.rut = rut;
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
+        this.competencias = competencias;
     }
 
     public String getNombre() {
@@ -68,6 +70,14 @@ public class Postulante {
         this.telefono = telefono;
     }
 
+    public ArrayList<Competencia> getCompetencias() {
+        return competencias;
+    }
+
+    public void setCompetencias(ArrayList<Competencia> competencias) {
+        this.competencias = competencias;
+    }
+
     public void mostrarPostulante() {
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Edad: " + this.edad);
@@ -75,5 +85,14 @@ public class Postulante {
         System.out.println("Direccion: " + this.direccion);
         System.out.println("Correo: " + this.correo);
         System.out.println("Telefono: " + this.telefono);
+        System.out.println("Competencias: ");
+
+        if (this.competencias.isEmpty()) {
+            System.out.println("- Ninguna.");
+        }
+
+        for (Competencia competencia : this.competencias) {
+            System.out.println("- " + competencia);
+        }
     }
 }
