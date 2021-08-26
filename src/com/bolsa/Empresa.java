@@ -95,6 +95,7 @@ public class Empresa {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
             System.out.println("### Puesto " + i + "   ###");
             puesto.mostrarPuestoDeTrabajo();
+            i++;
         }
     }
 }
