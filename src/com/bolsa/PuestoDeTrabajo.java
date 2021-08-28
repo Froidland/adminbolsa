@@ -86,6 +86,7 @@ public class PuestoDeTrabajo {
         for (Postulante postulante : this.postulantes) {
             if (postulante.getRut().equals(rutPostulanteAQuitar)) {
                 this.postulantes.remove(postulante);
+                break;
             }
         }
     }
