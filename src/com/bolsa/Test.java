@@ -62,5 +62,9 @@ public class Test {
         empresa1.getPuestosDeTrabajo().get(0).anadirPostulante(postulante3);
 
         empresa1.mostrarEmpresa();
+
+        empresa1.getPuestosDeTrabajo().get(0).quitarPostulante("84628364-8");
+
+        empresa1.mostrarEmpresa();
     }
 }
