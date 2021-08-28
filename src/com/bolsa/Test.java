@@ -10,8 +10,7 @@ public class Test {
                 "47261284-8",
                 "P. Sherman, Wallaby St. 42, Sydney",
                 "jimxugle@msn.com",
-                "812-340-3980",
-                new ArrayList<>()
+                "812-340-3980"
         );
 
         Postulante postulante2 = new Postulante(
@@ -20,8 +19,7 @@ public class Test {
                 "84628364-8",
                 "2831 Fincham Road, La Mesa, California",
                 "makarow@icloud.com",
-                "775-936-8557",
-                new ArrayList<>()
+                "775-936-8557"
         );
 
         Postulante postulante3 = new Postulante(
@@ -30,8 +28,7 @@ public class Test {
                 "94726153-4",
                 "2805 Conaway Street, Bloomington, Indiana",
                 "stakasa@yahoo.com",
-                "406-554-8986",
-                new ArrayList<>()
+                "406-554-8986"
         );
 
         Empresa empresa1 = new Empresa(
@@ -40,8 +37,7 @@ public class Test {
                 "2559 Ridenour Street, MOUNT CLEMENS, Michigan",
                 "https://discord.com/",
                 "support@discordapp.com",
-                "305-999-9880",
-                new ArrayList<>()
+                "305-999-9880"
         );
 
 
@@ -50,9 +46,7 @@ public class Test {
                 "Puesto de prueba",
                 500000,
                 5,
-                true,
-                new ArrayList<>(),
-                new ArrayList<>()
+                true
         );
 
         empresa1.anadirPuestoDeTrabajo(puesto1);
