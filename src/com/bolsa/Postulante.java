@@ -1,20 +1,20 @@
 package com.bolsa;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Postulante {
-    //TODO: Cambiar edad a fecha de nacimiento.
     private String nombre;
-    private int edad;
+    private LocalDate fechaDeNacimiento;
     private String rut;
     private String direccion;
     private String correo;
     private String telefono;
     private ArrayList<Competencia> competencias;
 
-    public Postulante(String nombre, int edad, String rut, String direccion, String correo, String telefono, ArrayList<Competencia> competencias) {
+    public Postulante(String nombre, String fechaDeNacimiento, String rut, String direccion, String correo, String telefono, ArrayList<Competencia> competencias) {
         this.nombre = nombre;
-        this.edad = edad;
+        this.fechaDeNacimiento = LocalDate.parse(fechaDeNacimiento);
         this.rut = rut;
         this.direccion = direccion;
         this.correo = correo;
@@ -30,12 +30,12 @@ public class Postulante {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
+    public LocalDate getFechaDeNacimiento() {
+        return fechaDeNacimiento;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
     public String getRut() {
@@ -80,7 +80,7 @@ public class Postulante {
 
     public void mostrarPostulante() {
         System.out.println("Nombre: " + this.nombre);
-        System.out.println("Edad: " + this.edad);
+        System.out.println("Fecha de nacimiento: " + this.fechaDeNacimiento);
         System.out.println("Rut: " + this.rut);
         System.out.println("Direccion: " + this.direccion);
         System.out.println("Correo: " + this.correo);
@@ -89,10 +89,10 @@ public class Postulante {
 
         if (this.competencias.isEmpty()) {
             System.out.println("- Ninguna.");
-        }
-
-        for (Competencia competencia : this.competencias) {
-            System.out.println("- " + competencia);
+        } else {
+            for (Competencia competencia : this.competencias) {
+                System.out.println("- " + competencia);
+            }
         }
     }
 }
