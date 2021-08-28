@@ -1,9 +1,9 @@
 package com.bolsa;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PuestoDeTrabajo {
-    //TODO: Implementar metodo añadirPostulante().
     private int id;
     private String nombre;
     private int sueldoBase;
@@ -76,6 +76,18 @@ public class PuestoDeTrabajo {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public void anadirPostulante(Postulante nuevoPostulante) {
+        this.postulantes.add(nuevoPostulante);
+    }
+
+    public void quitarPostulante(String rutPostulanteAQuitar) {
+        for (Postulante postulante : this.postulantes) {
+            if (postulante.getRut().equals(rutPostulanteAQuitar)) {
+                this.postulantes.remove(postulante);
+            }
+        }
     }
 
     public void mostrarPuestoDeTrabajo() {
