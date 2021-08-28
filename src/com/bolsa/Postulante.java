@@ -12,14 +12,14 @@ public class Postulante {
     private String telefono;
     private ArrayList<Competencia> competencias;
 
-    public Postulante(String nombre, String fechaDeNacimiento, String rut, String direccion, String correo, String telefono, ArrayList<Competencia> competencias) {
+    public Postulante(String nombre, String fechaDeNacimiento, String rut, String direccion, String correo, String telefono) {
         this.nombre = nombre;
         this.fechaDeNacimiento = LocalDate.parse(fechaDeNacimiento);
         this.rut = rut;
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
-        this.competencias = competencias;
+        this.competencias = new ArrayList<>();
     }
 
     public String getNombre() {

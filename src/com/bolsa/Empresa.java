@@ -11,14 +11,14 @@ public class Empresa {
     private String telefono;
     private ArrayList<PuestoDeTrabajo> puestosDeTrabajo;
 
-    public Empresa(String rut, String nombre, String direccion, String paginaWeb, String correo, String telefono, ArrayList<PuestoDeTrabajo> puestosDeTrabajo) {
+    public Empresa(String rut, String nombre, String direccion, String paginaWeb, String correo, String telefono) {
         this.rut = rut;
         this.nombre = nombre;
         this.direccion = direccion;
         this.paginaWeb = paginaWeb;
         this.correo = correo;
         this.telefono = telefono;
-        this.puestosDeTrabajo = puestosDeTrabajo;
+        this.puestosDeTrabajo = new ArrayList<>();
     }
 
     public String getRut() {
@@ -93,7 +93,7 @@ public class Empresa {
 
         System.out.println("###   Puestos de trabajo   ###");
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-            System.out.println("###   Puesto " + i + "   ###");
+            System.out.println("###   Puesto N°" + i + "   ###");
             puesto.mostrarPuestoDeTrabajo();
             i++;
         }

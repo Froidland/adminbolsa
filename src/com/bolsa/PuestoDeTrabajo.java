@@ -12,14 +12,14 @@ public class PuestoDeTrabajo {
     private ArrayList<Requisito> requisitos;
     private ArrayList<Postulante> postulantes;
 
-    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponible, ArrayList<Requisito> requisitos, ArrayList<Postulante> postulantes) {
+    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponible) {
         this.id = id;
         this.nombre = nombre;
         this.sueldoBase = sueldoBase;
         this.vacantes = vacantes;
         this.disponible = disponible;
-        this.requisitos = requisitos;
-        this.postulantes = postulantes;
+        this.requisitos = new ArrayList<>();
+        this.postulantes = new ArrayList<>();
     }
 
     public int getId() {
@@ -93,7 +93,7 @@ public class PuestoDeTrabajo {
 
     public void mostrarPuestoDeTrabajo() {
         System.out.println("ID: "+ this.id);
-        System.out.println("Nombre: "+ this.id);
+        System.out.println("Nombre: "+ this.nombre);
         System.out.println("Sueldo Base: "+ this.sueldoBase);
         System.out.println("Vacantes: "+ this.vacantes);
         System.out.print("¿Esta disponible?: ");
