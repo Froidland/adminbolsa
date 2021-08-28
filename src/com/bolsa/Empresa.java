@@ -9,7 +9,7 @@ public class Empresa {
     private String paginaWeb;
     private String correo;
     private String telefono;
-    ArrayList<PuestoDeTrabajo> puestosDeTrabajo;
+    private ArrayList<PuestoDeTrabajo> puestosDeTrabajo;
 
     public Empresa(String rut, String nombre, String direccion, String paginaWeb, String correo, String telefono, ArrayList<PuestoDeTrabajo> puestosDeTrabajo) {
         this.rut = rut;
