@@ -43,6 +43,11 @@ public class Postulante {
     }
 
     public void setRut(String rut) {
+        if (rut.charAt(rut.length() - 2) != '-') {
+            String rutPreGuion = rut.substring(0, rut.length() - 1);
+            this.rut = rutPreGuion + '-' + rut.charAt(rut.length() - 1);
+            return;
+        }
         this.rut = rut;
     }
 
@@ -71,11 +76,19 @@ public class Postulante {
     }
 
     public ArrayList<Competencia> getCompetencias() {
-        return competencias;
+        return new ArrayList<>(this.competencias);
     }
 
     public void setCompetencias(ArrayList<Competencia> competencias) {
         this.competencias = competencias;
+    }
+
+    public void anadirCompetencia(Competencia competencia) {
+        this.competencias.add(competencia);
+    }
+
+    public void quitarCompetencia(Competencia competencia) {
+        this.competencias.remove(competencia);
     }
 
     public void mostrarPostulante() {
