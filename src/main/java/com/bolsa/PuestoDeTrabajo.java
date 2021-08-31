@@ -1,7 +1,6 @@
 package com.bolsa;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PuestoDeTrabajo {
     private int id;
@@ -46,6 +45,10 @@ public class PuestoDeTrabajo {
         this.sueldoBase = sueldoBase;
     }
 
+    public void setSueldoBase(double sueldoBase) {
+        this.sueldoBase = (int) Math.round(sueldoBase);
+    }
+
     public int getVacantes() {
         return vacantes;
     }
@@ -55,7 +58,7 @@ public class PuestoDeTrabajo {
     }
 
     public ArrayList<Requisito> getRequisitos() {
-        return requisitos;
+        return new ArrayList<>(this.requisitos);
     }
 
     public void setRequisitos(ArrayList<Requisito> requisitos) {
@@ -63,7 +66,7 @@ public class PuestoDeTrabajo {
     }
 
     public ArrayList<Postulante> getPostulantes() {
-        return postulantes;
+        return new ArrayList<>(this.postulantes);
     }
 
     public void setPostulantes(ArrayList<Postulante> postulantes) {
@@ -82,13 +85,31 @@ public class PuestoDeTrabajo {
         this.postulantes.add(nuevoPostulante);
     }
 
-    public void quitarPostulante(String rutPostulanteAQuitar) {
+    public void anadirRequisito(Requisito requisito) {
+        this.requisitos.add(requisito);
+    }
+
+    public void quitarRequisito(Requisito requisito) {
+        this.requisitos.remove(requisito);
+    }
+
+    public void quitarPostulante(String rut) {
         for (Postulante postulante : this.postulantes) {
-            if (postulante.getRut().equals(rutPostulanteAQuitar)) {
+            if (postulante.getRut().equals(rut)) {
                 this.postulantes.remove(postulante);
-                break;
+                return;
             }
         }
+    }
+
+    public Postulante buscarPostulante(String rut) {
+        for (Postulante postulante : this.postulantes) {
+            if (postulante.getRut().equals(rut)) {
+                return postulante;
+            }
+        }
+
+        return null;
     }
 
     public void mostrarPuestoDeTrabajo() {
