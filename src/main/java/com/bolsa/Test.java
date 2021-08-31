@@ -49,16 +49,29 @@ public class Test {
                 true
         );
 
+        postulante3.setRut("947261534");
+
         empresa1.anadirPuestoDeTrabajo(puesto1);
 
-        empresa1.getPuestosDeTrabajo().get(0).anadirPostulante(postulante1);
-        empresa1.getPuestosDeTrabajo().get(0).anadirPostulante(postulante2);
-        empresa1.getPuestosDeTrabajo().get(0).anadirPostulante(postulante3);
+        empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante1);
+        empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante2);
+        empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante3);
 
         empresa1.mostrarEmpresa();
 
-        empresa1.getPuestosDeTrabajo().get(0).quitarPostulante("84628364-8");
+        empresa1.buscarPuestoDeTrabajo(1).setSueldoBase(500000.576);
 
+        empresa1.buscarPuestoDeTrabajo(1).quitarPostulante("84628364-8");
+
+        empresa1.mostrarEmpresa();
+
+        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST1);
+        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST2);
+        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST3);
+
+        empresa1.mostrarEmpresa();
+
+        empresa1.getPuestosDeTrabajo().get(0).getPostulantes().get(0).quitarCompetencia(Competencia.TEST2);
         empresa1.mostrarEmpresa();
     }
 }
