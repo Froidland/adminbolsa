@@ -26,11 +26,6 @@ public class Empresa {
     }
 
     public void setRut(String rut) {
-        if (rut.charAt(rut.length() - 2) != '-') {
-            String rutPreGuion = rut.substring(0, rut.length() - 1);
-            this.rut = rutPreGuion + '-' + rut.charAt(rut.length() - 1);
-            return;
-        }
         this.rut = rut;
     }
 
@@ -75,7 +70,7 @@ public class Empresa {
     }
 
     public ArrayList<PuestoDeTrabajo> getPuestosDeTrabajo() {
-        return new ArrayList<>(this.puestosDeTrabajo);
+        return puestosDeTrabajo;
     }
 
     public void setPuestosDeTrabajo(ArrayList<PuestoDeTrabajo> puestosDeTrabajo) {
@@ -84,16 +79,6 @@ public class Empresa {
 
     public void anadirPuestoDeTrabajo(PuestoDeTrabajo puesto) {
         this.puestosDeTrabajo.add(puesto);
-    }
-
-    public PuestoDeTrabajo buscarPuestoDeTrabajo(int id) {
-        for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-            if (puesto.getId() == id) {
-                return puesto;
-            }
-        }
-
-        return null;
     }
 
     public void mostrarEmpresa() {
