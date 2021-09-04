@@ -74,14 +74,6 @@ public class Empresa {
         this.telefono = telefono;
     }
 
-    public ArrayList<PuestoDeTrabajo> getPuestosDeTrabajo() {
-        return new ArrayList<>(this.puestosDeTrabajo);
-    }
-
-    public void setPuestosDeTrabajo(ArrayList<PuestoDeTrabajo> puestosDeTrabajo) {
-        this.puestosDeTrabajo = puestosDeTrabajo;
-    }
-
     public void anadirPuestoDeTrabajo(PuestoDeTrabajo puesto) {
         this.puestosDeTrabajo.add(puesto);
     }
@@ -98,6 +90,7 @@ public class Empresa {
 
     public void mostrarEmpresa() {
         int i = 1;
+        System.out.println("###   Empresa   ###");
         System.out.println("Rut: " + this.rut);
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Direccion: " + this.direccion);
@@ -105,12 +98,91 @@ public class Empresa {
         System.out.println("Correo: " + this.correo);
         System.out.println("Telefono: " + this.telefono);
         System.out.println();
+    }
+
+    public void mostrarPuestosDeTrabajo() {
+        System.out.println("###   Puestos de trabajo   ###");
+        if (!this.puestosDeTrabajo.isEmpty()) {
+            for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+                System.out.println("ID: " + puesto.getId());
+                System.out.println("Nombre: " + puesto.getNombre());
+                System.out.println("Sueldo Base: " + puesto.getSueldoBase());
+                System.out.println("Vacantes: " + puesto.getVacantes());
+                System.out.print("¿Esta disponible?: ");
+
+                if (puesto.isDisponible()) {
+                    System.out.println("Si.");
+                } else {
+                    System.out.println("No.");
+                }
+
+                System.out.println();
+                puesto.mostrarRequisitos();
+
+                System.out.println("###   Lista de postulantes   ###");
+                puesto.mostrarPostulantes();
+            }
+        } else {
+            System.out.println("Esta empresa no tiene puestos de trabajo.");
+        }
+    }
+
+
+    public void mostrarPuestosDeTrabajo(boolean disponibilidad) {
+        int i = 1;
+        boolean flagEncontrado = false;
 
         System.out.println("###   Puestos de trabajo   ###");
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-            System.out.println("###   Puesto N°" + i + "   ###");
-            puesto.mostrarPuestoDeTrabajo();
-            i++;
+            if (puesto.isDisponible() == disponibilidad) {
+                flagEncontrado = true;
+                System.out.printf("###   Puesto N°%d   ###", i++);
+                System.out.println("ID: "+ puesto.getId());
+                System.out.println("Nombre: "+ puesto.getNombre());
+                System.out.println("Sueldo Base: "+ puesto.getSueldoBase());
+                System.out.println("Vacantes: "+ puesto.getVacantes());
+
+                System.out.println();
+                puesto.mostrarRequisitos();
+
+                System.out.println("###   Lista de postulantes   ###");
+                puesto.mostrarPostulantes();
+            }
+        }
+
+        if (!flagEncontrado && disponibilidad) {
+            System.out.println("Esta empresa no tiene puestos de trabajo disponibles.");
+        }
+
+        if (!flagEncontrado && !disponibilidad) {
+            System.out.println("Esta empresa no tiene puestos de trabajo no disponibles.");
+        }
+    }
+
+    public void mostrarPuestoDeTrabajo(Requisito requisito) {
+        int i = 1;
+        boolean flagEncontrado = false;
+
+        System.out.println("###   Puestos de trabajo   ###");
+        for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+            if (puesto.hasRequisito(requisito)) {
+                flagEncontrado = true;
+                System.out.printf("###   Puesto N°%d   ###", i++);
+                System.out.println("ID: " + puesto.getId());
+                System.out.println("Nombre: " + puesto.getNombre());
+                System.out.println("Sueldo Base: " + puesto.getSueldoBase());
+                System.out.println("Vacantes: " + puesto.getVacantes());
+
+                System.out.println();
+                puesto.mostrarRequisitos();
+
+                System.out.println("###   Lista de postulantes   ###");
+                puesto.mostrarPostulantes();
+            }
+        }
+
+        if (!flagEncontrado) {
+            System.out.println("Esta empresa no tiene puestos de trabajo que contengan el requisito " + requisito.name() + ".");
         }
     }
 }
