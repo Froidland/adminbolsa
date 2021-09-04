@@ -79,8 +79,8 @@ public class Postulante {
         return new ArrayList<>(this.competencias);
     }
 
-    public void setCompetencias(ArrayList<Competencia> competencias) {
-        this.competencias = competencias;
+    public boolean hasCompetencia(Competencia competencia) {
+        return this.competencias.contains(competencia);
     }
 
     public void anadirCompetencia(Competencia competencia) {
