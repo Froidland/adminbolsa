@@ -89,7 +89,7 @@ public class Empresa {
     }
 
     public void mostrarEmpresa() {
-        int i = 1;
+        
         System.out.println("###   Empresa   ###");
         System.out.println("Rut: " + this.rut);
         System.out.println("Nombre: " + this.nombre);
@@ -108,7 +108,7 @@ public class Empresa {
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
                 System.out.println("Vacantes: " + puesto.getVacantes());
-                System.out.print("Â¿Esta disponible?: ");
+                System.out.print("¿Esta disponible?: ");
 
                 if (puesto.isDisponible()) {
                     System.out.println("Si.");
@@ -136,7 +136,7 @@ public class Empresa {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
             if (puesto.isDisponible() == disponibilidad) {
                 flagEncontrado = true;
-                System.out.printf("###   Puesto NÂ°%d   ###", i++);
+                System.out.printf("###   Puesto N°%d   ###%n", i++);
                 System.out.println("ID: "+ puesto.getId());
                 System.out.println("Nombre: "+ puesto.getNombre());
                 System.out.println("Sueldo Base: "+ puesto.getSueldoBase());
