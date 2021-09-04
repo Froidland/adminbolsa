@@ -7,16 +7,16 @@ public class PuestoDeTrabajo {
     private String nombre;
     private int sueldoBase;
     private int vacantes;
-    private boolean disponible;
+    private boolean disponibilidad;
     private ArrayList<Requisito> requisitos;
     private ArrayList<Postulante> postulantes;
 
-    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponible) {
+    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponibilidad) {
         this.id = id;
         this.nombre = nombre;
         this.sueldoBase = sueldoBase;
         this.vacantes = vacantes;
-        this.disponible = disponible;
+        this.disponibilidad = disponibilidad;
         this.requisitos = new ArrayList<>();
         this.postulantes = new ArrayList<>();
     }
@@ -61,24 +61,12 @@ public class PuestoDeTrabajo {
         return new ArrayList<>(this.requisitos);
     }
 
-    public void setRequisitos(ArrayList<Requisito> requisitos) {
-        this.requisitos = requisitos;
-    }
-
-    public ArrayList<Postulante> getPostulantes() {
-        return new ArrayList<>(this.postulantes);
-    }
-
-    public void setPostulantes(ArrayList<Postulante> postulantes) {
-        this.postulantes = postulantes;
-    }
-
     public boolean isDisponible() {
-        return disponible;
+        return disponibilidad;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     public void anadirPostulante(Postulante nuevoPostulante) {
@@ -112,26 +100,6 @@ public class PuestoDeTrabajo {
         return null;
     }
 
-    public void mostrarPuestoDeTrabajo() {
-        System.out.println("ID: "+ this.id);
-        System.out.println("Nombre: "+ this.nombre);
-        System.out.println("Sueldo Base: "+ this.sueldoBase);
-        System.out.println("Vacantes: "+ this.vacantes);
-        System.out.print("¿Esta disponible?: ");
-
-        if (this.isDisponible()) {
-            System.out.println("Si.");
-        } else {
-            System.out.println("No.");
-        }
-
-        System.out.println();
-        this.mostrarRequisitos();
-
-        System.out.println("###   Lista de postulantes   ###");
-        this.mostrarPostulantes();
-    }
-
     public void mostrarRequisitos() {
         System.out.println("Requisitos: ");
 
@@ -148,14 +116,29 @@ public class PuestoDeTrabajo {
         System.out.println();
     }
 
+    public boolean hasRequisito(Requisito requisito) {
+        return this.requisitos.contains(requisito);
+    }
+
     public void mostrarPostulantes() {
         int i = 1;
 
-        for (Postulante postulanteActual : this.postulantes) {
-            System.out.println("###   Postulante N°" + i + "   ###");
-            postulanteActual.mostrarPostulante();
+        for (Postulante postulante : this.postulantes) {
+            System.out.printf("###   Postulante N°%d   ###", i++);
+            postulante.mostrarPostulante();
             System.out.println();
-            i++;
+        }
+    }
+
+    public void mostrarPostulantes(Competencia competencia) {
+        int i = 1;
+
+        for (Postulante postulante : this.postulantes) {
+            if (postulante.hasCompetencia(competencia)) {
+                System.out.printf("###   Postulante N°%d   ###", i++);
+                postulante.mostrarPostulante();
+                System.out.println();
+            }
         }
     }
 }
