@@ -1,7 +1,10 @@
 package com.bolsa;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * 
+ */
 public class Empresa {
     private String rut;
     private String nombre;
@@ -150,12 +153,8 @@ public class Empresa {
             }
         }
 
-        if (!flagEncontrado && disponibilidad) {
+        if (!flagEncontrado) {
             System.out.println("Esta empresa no tiene puestos de trabajo disponibles.");
-        }
-
-        if (!flagEncontrado && !disponibilidad) {
-            System.out.println("Esta empresa no tiene puestos de trabajo no disponibles.");
         }
     }
 

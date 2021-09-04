@@ -1,6 +1,6 @@
 package com.bolsa;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
 

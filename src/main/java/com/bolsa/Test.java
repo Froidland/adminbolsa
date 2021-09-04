@@ -80,5 +80,7 @@ public class Test {
         empresa1.buscarPuestoDeTrabajo(1).anadirRequisito(Requisito.TEST1);
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestoDeTrabajo(Requisito.TEST2);
+        
+        empresa1.buscarPuestoDeTrabajo(1).mostrarPostulantes();
     }
 }

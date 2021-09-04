@@ -1,6 +1,6 @@
 package com.bolsa;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class PuestoDeTrabajo {
     private int id;
@@ -9,7 +9,7 @@ public class PuestoDeTrabajo {
     private int vacantes;
     private boolean disponibilidad;
     private ArrayList<Requisito> requisitos;
-    private ArrayList<Postulante> postulantes;
+    private HashMap<String,Postulante> postulantes;
 
     public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponibilidad) {
         this.id = id;
@@ -18,7 +18,7 @@ public class PuestoDeTrabajo {
         this.vacantes = vacantes;
         this.disponibilidad = disponibilidad;
         this.requisitos = new ArrayList<>();
-        this.postulantes = new ArrayList<>();
+        postulantes = new HashMap<>();
     }
 
     public int getId() {
@@ -70,7 +70,7 @@ public class PuestoDeTrabajo {
     }
 
     public void anadirPostulante(Postulante nuevoPostulante) {
-        this.postulantes.add(nuevoPostulante);
+        this.postulantes.put(nuevoPostulante.getRut(), nuevoPostulante);
     }
 
     public void anadirRequisito(Requisito requisito) {
@@ -82,21 +82,23 @@ public class PuestoDeTrabajo {
     }
 
     public void quitarPostulante(String rut) {
-        for (Postulante postulante : this.postulantes) {
-            if (postulante.getRut().equals(rut)) {
-                this.postulantes.remove(postulante);
-                return;
+        String borrar=null;
+        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
+            if(iterator.getKey().equals(rut)){
+                borrar = rut;
             }
         }
+        postulantes.remove(borrar);
+        if(borrar==null)
+            System.out.println("No se ha podido quitar el postulante porque no se encontr�.");
     }
 
     public Postulante buscarPostulante(String rut) {
-        for (Postulante postulante : this.postulantes) {
-            if (postulante.getRut().equals(rut)) {
-                return postulante;
+        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
+            if (iterator.getKey().equals(rut)) {
+                return postulantes.get(rut);
             }
         }
-
         return null;
     }
 
@@ -123,9 +125,9 @@ public class PuestoDeTrabajo {
     public void mostrarPostulantes() {
         int i = 1;
 
-        for (Postulante postulante : this.postulantes) {
-            System.out.printf("###   Postulante N°%d   ###", i++);
-            postulante.mostrarPostulante();
+        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
+            System.out.printf("###   Postulante #%d   ###", i++);
+            postulantes.get(iterator.getKey()).mostrarPostulante();
             System.out.println();
         }
     }
@@ -133,10 +135,10 @@ public class PuestoDeTrabajo {
     public void mostrarPostulantes(Competencia competencia) {
         int i = 1;
 
-        for (Postulante postulante : this.postulantes) {
-            if (postulante.hasCompetencia(competencia)) {
-                System.out.printf("###   Postulante N°%d   ###", i++);
-                postulante.mostrarPostulante();
+        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
+            if (postulantes.get(iterator.getKey()).hasCompetencia(competencia)) {
+                System.out.printf("###   Postulante #%d   ###", i++);
+                postulantes.get(iterator.getKey()).mostrarPostulante();
                 System.out.println();
             }
         }
