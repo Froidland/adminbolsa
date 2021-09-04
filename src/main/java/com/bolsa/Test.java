@@ -1,7 +1,5 @@
 package com.bolsa;
 
-import java.util.ArrayList;
-
 public class Test {
     public static void runTest() {
         Postulante postulante1 = new Postulante(
@@ -58,20 +56,29 @@ public class Test {
         empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante3);
 
         empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestosDeTrabajo();
 
         empresa1.buscarPuestoDeTrabajo(1).setSueldoBase(500000.576);
 
         empresa1.buscarPuestoDeTrabajo(1).quitarPostulante("84628364-8");
 
         empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestosDeTrabajo();
 
         empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST1);
         empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST2);
         empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST3);
 
         empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestosDeTrabajo();
 
-        empresa1.getPuestosDeTrabajo().get(0).getPostulantes().get(0).quitarCompetencia(Competencia.TEST2);
+        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").quitarCompetencia(Competencia.TEST2);
+        empresa1.buscarPuestoDeTrabajo(1).setDisponibilidad(false);
         empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestosDeTrabajo(true);
+
+        empresa1.buscarPuestoDeTrabajo(1).anadirRequisito(Requisito.TEST1);
+        empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestoDeTrabajo(Requisito.TEST2);
     }
 }
