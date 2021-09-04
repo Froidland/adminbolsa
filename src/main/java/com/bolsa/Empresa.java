@@ -1,10 +1,7 @@
 package com.bolsa;
 
 import java.util.ArrayList;
-/**
- * 
- * 
- */
+
 public class Empresa {
     private String rut;
     private String nombre;
