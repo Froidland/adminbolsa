@@ -89,7 +89,7 @@ public class Empresa {
     }
 
     public void mostrarEmpresa() {
-        
+
         System.out.println("###   Empresa   ###");
         System.out.println("Rut: " + this.rut);
         System.out.println("Nombre: " + this.nombre);
@@ -101,9 +101,12 @@ public class Empresa {
     }
 
     public void mostrarPuestosDeTrabajo() {
+        int i = 1;
+
         System.out.println("###   Puestos de trabajo   ###");
         if (!this.puestosDeTrabajo.isEmpty()) {
             for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+                System.out.printf("###   Puesto N°%d   ###\n", i++);
                 System.out.println("ID: " + puesto.getId());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
@@ -136,11 +139,11 @@ public class Empresa {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
             if (puesto.isDisponible() == disponibilidad) {
                 flagEncontrado = true;
-                System.out.printf("###   Puesto N°%d   ###%n", i++);
-                System.out.println("ID: "+ puesto.getId());
-                System.out.println("Nombre: "+ puesto.getNombre());
-                System.out.println("Sueldo Base: "+ puesto.getSueldoBase());
-                System.out.println("Vacantes: "+ puesto.getVacantes());
+                System.out.printf("###   Puesto N°%d   ###\n", i++);
+                System.out.println("ID: " + puesto.getId());
+                System.out.println("Nombre: " + puesto.getNombre());
+                System.out.println("Sueldo Base: " + puesto.getSueldoBase());
+                System.out.println("Vacantes: " + puesto.getVacantes());
 
                 System.out.println();
                 puesto.mostrarRequisitos();
@@ -163,7 +166,7 @@ public class Empresa {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
             if (puesto.hasRequisito(requisito)) {
                 flagEncontrado = true;
-                System.out.printf("###   Puesto NÂ°%d   ###", i++);
+                System.out.printf("###   Puesto #%d   ###\n", i++);
                 System.out.println("ID: " + puesto.getId());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());

@@ -9,7 +9,7 @@ public class PuestoDeTrabajo {
     private int vacantes;
     private boolean disponibilidad;
     private ArrayList<Requisito> requisitos;
-    private HashMap<String,Postulante> postulantes;
+    private HashMap<String, Postulante> postulantes;
 
     public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponibilidad) {
         this.id = id;
@@ -82,19 +82,20 @@ public class PuestoDeTrabajo {
     }
 
     public void quitarPostulante(String rut) {
-        String borrar=null;
-        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
-            if(iterator.getKey().equals(rut)){
+        String borrar = null;
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            if (iterator.getKey().equals(rut)) {
                 borrar = rut;
+                break;
             }
         }
         postulantes.remove(borrar);
-        if(borrar==null)
+        if (borrar == null)
             System.out.println("No se ha podido quitar el postulante porque no se encontró.");
     }
 
     public Postulante buscarPostulante(String rut) {
-        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
             if (iterator.getKey().equals(rut)) {
                 return postulantes.get(rut);
             }
@@ -125,8 +126,8 @@ public class PuestoDeTrabajo {
     public void mostrarPostulantes() {
         int i = 1;
 
-        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
-            System.out.printf("###   Postulante #%d   ###", i++);
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            System.out.printf("###   Postulante #%d   ###\n", i++);
             postulantes.get(iterator.getKey()).mostrarPostulante();
             System.out.println();
         }
@@ -135,9 +136,9 @@ public class PuestoDeTrabajo {
     public void mostrarPostulantes(Competencia competencia) {
         int i = 1;
 
-        for (Map.Entry<String,Postulante> iterator : postulantes.entrySet()) {
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
             if (postulantes.get(iterator.getKey()).hasCompetencia(competencia)) {
-                System.out.printf("###   Postulante #%d   ###", i++);
+                System.out.printf("###   Postulante #%d   ###\n", i++);
                 postulantes.get(iterator.getKey()).mostrarPostulante();
                 System.out.println();
             }
