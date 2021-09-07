@@ -159,7 +159,7 @@ public class Empresa {
         }
     }
 
-    public void mostrarPuestoDeTrabajo(Requisito requisito) {
+    public void mostrarPuestosDeTrabajo(Requisito requisito) {
         int i = 1;
         boolean flagEncontrado = false;
 
