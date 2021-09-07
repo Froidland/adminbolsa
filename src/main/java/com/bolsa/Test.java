@@ -40,47 +40,46 @@ public class Test {
 
 
         PuestoDeTrabajo puesto1 = new PuestoDeTrabajo(
-                1,
                 "Puesto de prueba",
                 500000,
                 5,
                 true
         );
-
+        String idGenerado = puesto1.getId().toString();
         postulante3.setRut("947261534");
 
         empresa1.anadirPuestoDeTrabajo(puesto1);
 
-        empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante1);
-        empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante2);
-        empresa1.buscarPuestoDeTrabajo(1).anadirPostulante(postulante3);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).anadirPostulante(postulante1);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).anadirPostulante(postulante2);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).anadirPostulante(postulante3);
 
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo();
 
-        empresa1.buscarPuestoDeTrabajo(1).setSueldoBase(500000.576);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).setSueldoBase(500000.576);
 
-        empresa1.buscarPuestoDeTrabajo(1).quitarPostulante("84628364-8");
-
-        empresa1.mostrarEmpresa();
-        empresa1.mostrarPuestosDeTrabajo();
-
-        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST1);
-        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST2);
-        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST3);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).quitarPostulante("84628364-8");
 
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo();
 
-        empresa1.buscarPuestoDeTrabajo(1).buscarPostulante("47261284-8").quitarCompetencia(Competencia.TEST2);
-        empresa1.buscarPuestoDeTrabajo(1).setDisponibilidad(false);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST1);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST2);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST3);
+
+        empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestosDeTrabajo();
+
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").quitarCompetencia(Competencia.TEST2);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).setDisponibilidad(false);
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo(true);
 
-        empresa1.buscarPuestoDeTrabajo(1).anadirRequisito(Requisito.TEST1);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).anadirRequisito(Requisito.TEST1);
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestoDeTrabajo(Requisito.TEST2);
 
-        empresa1.buscarPuestoDeTrabajo(1).mostrarPostulantes();
+        empresa1.buscarPuestoDeTrabajo(idGenerado).mostrarPostulantes();
     }
 }

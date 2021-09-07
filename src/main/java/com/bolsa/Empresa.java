@@ -1,6 +1,7 @@
 package com.bolsa;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Empresa {
     private String rut;
@@ -78,9 +79,9 @@ public class Empresa {
         this.puestosDeTrabajo.add(puesto);
     }
 
-    public PuestoDeTrabajo buscarPuestoDeTrabajo(int id) {
+    public PuestoDeTrabajo buscarPuestoDeTrabajo(String id) {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-            if (puesto.getId() == id) {
+            if (puesto.getId().compareTo(UUID.fromString(id)) == 0) {
                 return puesto;
             }
         }

@@ -3,7 +3,7 @@ package com.bolsa;
 import java.util.*;
 
 public class PuestoDeTrabajo {
-    private int id;
+    private UUID id;
     private String nombre;
     private int sueldoBase;
     private int vacantes;
@@ -11,8 +11,8 @@ public class PuestoDeTrabajo {
     private ArrayList<Requisito> requisitos;
     private HashMap<String, Postulante> postulantes;
 
-    public PuestoDeTrabajo(int id, String nombre, int sueldoBase, int vacantes, boolean disponibilidad) {
-        this.id = id;
+    public PuestoDeTrabajo(String nombre, int sueldoBase, int vacantes, boolean disponibilidad) {
+        this.id = UUID.randomUUID();
         this.nombre = nombre;
         this.sueldoBase = sueldoBase;
         this.vacantes = vacantes;
@@ -21,12 +21,12 @@ public class PuestoDeTrabajo {
         postulantes = new HashMap<>();
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = UUID.fromString(id);
     }
 
     public String getNombre() {
