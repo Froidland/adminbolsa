@@ -45,41 +45,58 @@ public class Test {
                 5,
                 true
         );
+
+        // Obtener el id generado aleatoriamente para luego ser buscado en la lista.
         String idGenerado = puesto1.getId().toString();
+
+        // Prueba: Formato de un rut sin guion.
         postulante3.setRut("947261534");
 
         empresa1.anadirPuestoDeTrabajo(puesto1);
 
+        // Prueba: Busqueda de puesto de trabajo por ID y añadirle postulantes.
         empresa1.buscarPuestoDeTrabajo(idGenerado).anadirPostulante(postulante1);
         empresa1.buscarPuestoDeTrabajo(idGenerado).anadirPostulante(postulante2);
         empresa1.buscarPuestoDeTrabajo(idGenerado).anadirPostulante(postulante3);
 
+        // Mostrar datos.
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo();
 
+        // Prueba: Cambio de sueldo base despues de ser instanciado el puesto de trabajo.
         empresa1.buscarPuestoDeTrabajo(idGenerado).setSueldoBase(500000.576);
 
+        // Prueba: Buscar un postulante por ID y quitarlo de la lista de postulantes.
         empresa1.buscarPuestoDeTrabajo(idGenerado).quitarPostulante("84628364-8");
 
+        // Mostrar datos.
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo();
 
+        // Prueba: Agregar competencias a un postulante despues de ser instanciado.
         empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST1);
         empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST2);
         empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST3);
 
+        // Mostrar datos.
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo();
 
+        // Prueba: Quitar competencia de un postulante.
         empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").quitarCompetencia(Competencia.TEST2);
+
+        // Prueba: Cambiar la disponibilidad de un puesto de trabajo.
         empresa1.buscarPuestoDeTrabajo(idGenerado).setDisponibilidad(false);
+
+        // Prueba: Mostrar datos, filtrando los puestos de trabajo por disponibilidad.
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo(true);
 
+        // Prueba: Agregar requisito a un puesto de trabajo.
         empresa1.buscarPuestoDeTrabajo(idGenerado).anadirRequisito(Requisito.TEST1);
-        empresa1.mostrarEmpresa();
-        empresa1.mostrarPuestoDeTrabajo(Requisito.TEST2);
 
-        empresa1.buscarPuestoDeTrabajo(idGenerado).mostrarPostulantes();
+        // Prueba: Mostrar datos, filtrando los puestos de trabajo por un requisito especifico.
+        empresa1.mostrarEmpresa();
+        empresa1.mostrarPuestosDeTrabajo(Requisito.TEST2);
     }
 }
