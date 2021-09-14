@@ -1,10 +1,13 @@
 package com.bolsa;
 
-import java.util.*;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Test.runTest();
+    public static Empresa empresa;
+
+    public static void main(String[] args) throws IOException {
+        Setup.run();
+        Menu.runConsole();
     }
 }
