@@ -15,7 +15,7 @@ public class Postulante {
     public Postulante(String nombre, String fechaDeNacimiento, String rut, String direccion, String correo, String telefono) {
         this.nombre = nombre;
         this.fechaDeNacimiento = LocalDate.parse(fechaDeNacimiento);
-        this.rut = rut;
+        this.rut = parseRut(rut);
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
@@ -43,13 +43,18 @@ public class Postulante {
     }
 
     public void setRut(String rut) {
+        this.rut = parseRut(rut);
+    }
+
+    private String parseRut(String rut) {
         if (rut.charAt(rut.length() - 2) != '-') {
             String rutPreGuion = rut.substring(0, rut.length() - 1);
-            this.rut = rutPreGuion + '-' + rut.charAt(rut.length() - 1);
-            return;
+            return (rutPreGuion + '-' + rut.charAt(rut.length() - 1));
         }
-        this.rut = rut;
+
+        return rut;
     }
+
 
     public String getDireccion() {
         return direccion;
@@ -104,7 +109,7 @@ public class Postulante {
             System.out.println("- Ninguna.");
         } else {
             for (Competencia competencia : this.competencias) {
-                System.out.println("- " + competencia);
+                System.out.println("- " + competencia.toString().replaceAll("_", " "));
             }
         }
     }
