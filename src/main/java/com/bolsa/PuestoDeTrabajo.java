@@ -11,22 +11,18 @@ public class PuestoDeTrabajo {
     private ArrayList<Requisito> requisitos;
     private HashMap<String, Postulante> postulantes;
 
-    public PuestoDeTrabajo(String nombre, int sueldoBase, int vacantes, boolean disponibilidad) {
+    public PuestoDeTrabajo(String nombre, int sueldoBase, int vacantes) {
         this.id = UUID.randomUUID();
         this.nombre = nombre;
         this.sueldoBase = sueldoBase;
         this.vacantes = vacantes;
-        this.disponibilidad = disponibilidad;
+        this.disponibilidad = false;
         this.requisitos = new ArrayList<>();
         postulantes = new HashMap<>();
     }
 
-    public UUID getId() {
+    public UUID getUUID() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = UUID.fromString(id);
     }
 
     public String getNombre() {
@@ -67,6 +63,17 @@ public class PuestoDeTrabajo {
 
     public void setDisponibilidad(boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
+    }
+
+    public void setDisponibilidad(String disponibilidad) {
+        if (disponibilidad.toLowerCase().contentEquals("si")) {
+            this.disponibilidad = true;
+            return;
+        }
+
+        if (disponibilidad.toLowerCase().contentEquals("no")) {
+            this.disponibilidad = false;
+        }
     }
 
     public void anadirPostulante(Postulante nuevoPostulante) {
@@ -113,7 +120,7 @@ public class PuestoDeTrabajo {
         }
 
         for (Requisito requisito : this.requisitos) {
-            System.out.println("- " + requisito);
+            System.out.println("- " + requisito.toString().replaceAll("_", " "));
         }
 
         System.out.println();
