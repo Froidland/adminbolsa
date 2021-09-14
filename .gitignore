@@ -110,3 +110,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+# Auto added
+/target/
