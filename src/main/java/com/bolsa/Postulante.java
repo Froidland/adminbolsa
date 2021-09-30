@@ -15,7 +15,7 @@ public class Postulante {
     public Postulante(String nombre, String fechaDeNacimiento, String rut, String direccion, String correo, String telefono) {
         this.nombre = nombre;
         this.fechaDeNacimiento = LocalDate.parse(fechaDeNacimiento);
-        this.rut = rut;
+        this.rut = parseRut(rut);
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
@@ -43,13 +43,18 @@ public class Postulante {
     }
 
     public void setRut(String rut) {
+        this.rut = parseRut(rut);
+    }
+
+    private String parseRut(String rut) {
         if (rut.charAt(rut.length() - 2) != '-') {
             String rutPreGuion = rut.substring(0, rut.length() - 1);
-            this.rut = rutPreGuion + '-' + rut.charAt(rut.length() - 1);
-            return;
+            return (rutPreGuion + '-' + rut.charAt(rut.length() - 1));
         }
-        this.rut = rut;
+
+        return rut;
     }
+
 
     public String getDireccion() {
         return direccion;
@@ -78,19 +83,31 @@ public class Postulante {
     public ArrayList<Competencia> getCompetencias() {
         return new ArrayList<>(this.competencias);
     }
-
+    /**
+     * Metodo que indica si un postulante tiene una competencia a traves de true o false.
+     * @param competencia 
+     * @return 
+     */
     public boolean hasCompetencia(Competencia competencia) {
         return this.competencias.contains(competencia);
     }
-
+    /**
+     * Metodo que añade una competencia a un postulante.
+     * @param competencia 
+     */
     public void anadirCompetencia(Competencia competencia) {
         this.competencias.add(competencia);
     }
-
+    /**
+     * Metodo que elimina una competencia de un postulante. Debe recibir la competencia que se desea eliminar.
+     * @param competencia 
+     */
     public void quitarCompetencia(Competencia competencia) {
         this.competencias.remove(competencia);
     }
-
+    /**
+     * Metodo que muestra un postulante junto con una lista de sus competencias.
+     */
     public void mostrarPostulante() {
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Fecha de nacimiento: " + this.fechaDeNacimiento);
@@ -104,7 +121,7 @@ public class Postulante {
             System.out.println("- Ninguna.");
         } else {
             for (Competencia competencia : this.competencias) {
-                System.out.println("- " + competencia);
+                System.out.println("- " + competencia.toString().replaceAll("_", " "));
             }
         }
     }

@@ -13,7 +13,7 @@ public class Empresa {
     private ArrayList<PuestoDeTrabajo> puestosDeTrabajo;
 
     public Empresa(String rut, String nombre, String direccion, String paginaWeb, String correo, String telefono) {
-        this.rut = rut;
+        this.rut = parseRut(rut);
         this.nombre = nombre;
         this.direccion = direccion;
         this.paginaWeb = paginaWeb;
@@ -27,12 +27,16 @@ public class Empresa {
     }
 
     public void setRut(String rut) {
+        this.rut = parseRut(rut);
+    }
+
+    private String parseRut(String rut) {
         if (rut.charAt(rut.length() - 2) != '-') {
             String rutPreGuion = rut.substring(0, rut.length() - 1);
-            this.rut = rutPreGuion + '-' + rut.charAt(rut.length() - 1);
-            return;
+            return (rutPreGuion + '-' + rut.charAt(rut.length() - 1));
         }
-        this.rut = rut;
+
+        return rut;
     }
 
     public String getNombre() {
@@ -75,20 +79,44 @@ public class Empresa {
         this.telefono = telefono;
     }
 
+    public ArrayList<PuestoDeTrabajo> getPuestosDeTrabajo() {
+        return new ArrayList<>(this.puestosDeTrabajo);
+    }
+
     public void anadirPuestoDeTrabajo(PuestoDeTrabajo puesto) {
         this.puestosDeTrabajo.add(puesto);
     }
-
-    public PuestoDeTrabajo buscarPuestoDeTrabajo(String id) {
+    /**
+     * Este metodo busca un puesto de trabajo, para ello debe recibir el UUID del puesto buscado, en caso de no encontrar el puesto retornará null.
+     * @param uuid
+     * @return 
+     */
+    public PuestoDeTrabajo buscarPuestoDeTrabajo(UUID uuid) {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-            if (puesto.getId().compareTo(UUID.fromString(id)) == 0) {
+            if (puesto.getUUID().compareTo(uuid) == 0) {
                 return puesto;
             }
         }
 
         return null;
     }
-
+    public void eliminarPuestoDeTrabajo(UUID uuid) {
+        PuestoDeTrabajo borrar = null;
+        for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+            if (puesto.getUUID().compareTo(uuid) == 0) {
+                borrar = puesto;
+            }
+        }
+        puestosDeTrabajo.remove(borrar);
+        if (borrar == null)
+            System.out.println("No se ha podido quitar el postulante porque no se encontró.");
+        else
+            System.out.println("Postulante eliminado.");
+    }
+    
+    /**
+     * Metodo que muestra los datos de la empresa.
+     */
     public void mostrarEmpresa() {
 
         System.out.println("###   Empresa   ###");
@@ -100,7 +128,9 @@ public class Empresa {
         System.out.println("Telefono: " + this.telefono);
         System.out.println();
     }
-
+    /**
+     * Método sin parametros que listará todos los puestos de trabajo de una empresa.
+     */
     public void mostrarPuestosDeTrabajo() {
         int i = 1;
 
@@ -108,7 +138,7 @@ public class Empresa {
         if (!this.puestosDeTrabajo.isEmpty()) {
             for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
                 System.out.printf("###   Puesto N°%d   ###\n", i++);
-                System.out.println("ID: " + puesto.getId());
+                System.out.println("ID: " + puesto.getUUID());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
                 System.out.println("Vacantes: " + puesto.getVacantes());
@@ -131,7 +161,10 @@ public class Empresa {
         }
     }
 
-
+    /**
+     * Método para listar puestos de trabajo según su disponibilidad.
+     * @param disponibilidad Valor (si/no) que determina si se muestran los puestos de trabajo que estan disponibles o los sin disponibilidad.
+     */
     public void mostrarPuestosDeTrabajo(boolean disponibilidad) {
         int i = 1;
         boolean flagEncontrado = false;
@@ -141,7 +174,7 @@ public class Empresa {
             if (puesto.isDisponible() == disponibilidad) {
                 flagEncontrado = true;
                 System.out.printf("###   Puesto N°%d   ###\n", i++);
-                System.out.println("ID: " + puesto.getId());
+                System.out.println("ID: " + puesto.getUUID());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
                 System.out.println("Vacantes: " + puesto.getVacantes());
@@ -158,7 +191,10 @@ public class Empresa {
             System.out.println("Esta empresa no tiene puestos de trabajo disponibles.");
         }
     }
-
+    /**
+     * Método que lista los puestos de trabajo deacuerdo a un requisito.
+     * @param requisito Es el requisito que se espera que tengan los puestos de trabajo que se listarán.
+     */
     public void mostrarPuestosDeTrabajo(Requisito requisito) {
         int i = 1;
         boolean flagEncontrado = false;
@@ -168,7 +204,7 @@ public class Empresa {
             if (puesto.hasRequisito(requisito)) {
                 flagEncontrado = true;
                 System.out.printf("###   Puesto #%d   ###\n", i++);
-                System.out.println("ID: " + puesto.getId());
+                System.out.println("ID: " + puesto.getUUID());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
                 System.out.println("Vacantes: " + puesto.getVacantes());

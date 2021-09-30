@@ -1,8 +1,11 @@
 package com.bolsa;
 
-import java.sql.SQLOutput;
+import java.util.UUID;
 
 public class Test {
+    /**
+     * Metodo que se utiliza para testear los metodos del proyecto.
+     */
     public static void runTest() {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_BLACK = "\u001B[30m";
@@ -54,12 +57,13 @@ public class Test {
         PuestoDeTrabajo puesto1 = new PuestoDeTrabajo(
                 "Puesto de prueba",
                 500000,
-                5,
-                true
+                5
         );
 
+        String nombre = postulante1.getRut();
+
         // Obtener el id generado aleatoriamente para luego ser buscado en la lista.
-        String idGenerado = puesto1.getId().toString();
+        UUID idGenerado = puesto1.getUUID();
 
         // Prueba: Formato de un rut sin guion.
         postulante3.setRut("947261534");
@@ -101,9 +105,9 @@ public class Test {
         empresa1.buscarPuestoDeTrabajo(idGenerado).mostrarPostulantes();
 
         // Prueba: Agregar competencias a un postulante despues de ser instanciado.
-        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST1);
-        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST2);
-        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TEST3);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TRABAJO_EN_EQUIPO);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TENACIDAD);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").anadirCompetencia(Competencia.TOLERANCIA_AL_ESTRES);
 
         System.out.println(ANSI_RED + "Prueba: Buscar un postulante y agregarle 3 competencias.");
         System.out.println("Resultado esperado: " + ANSI_BLUE + "Una lista con dos postulantes de los cuales uno tiene 3 competencias.");
@@ -112,7 +116,7 @@ public class Test {
         empresa1.buscarPuestoDeTrabajo(idGenerado).mostrarPostulantes();
 
         // Prueba: Quitar competencia de un postulante.
-        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").quitarCompetencia(Competencia.TEST2);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).buscarPostulante("47261284-8").quitarCompetencia(Competencia.TOLERANCIA_AL_ESTRES);
 
         System.out.println(ANSI_RED + "Prueba: Quitarle una competencia a un postulante.");
         System.out.println("Resultado esperado: " + ANSI_BLUE + "Un postulante con dos competencias.");
@@ -135,7 +139,7 @@ public class Test {
         empresa1.mostrarPuestosDeTrabajo(true);
 
         // Prueba: Agregar requisito a un puesto de trabajo.
-        empresa1.buscarPuestoDeTrabajo(idGenerado).anadirRequisito(Requisito.TEST1);
+        empresa1.buscarPuestoDeTrabajo(idGenerado).anadirRequisito(Requisito.TRABAJO_EN_EQUIPO);
 
         System.out.println(ANSI_RED + "Prueba: Agregar un requisito a un puesto de trabajo.");
         System.out.println("Resultado esperado: " + ANSI_BLUE + "Una lista con un requisito.");
@@ -148,11 +152,12 @@ public class Test {
         System.out.println("Resultado esperado: " + ANSI_BLUE + "Un puesto de trabajo con un requisito.");
         System.out.println(ANSI_RED + "Resultado obtenido: " + ANSI_GREEN);
 
-        empresa1.mostrarPuestosDeTrabajo(Requisito.TEST1);
+        empresa1.mostrarPuestosDeTrabajo(Requisito.TRABAJO_EN_EQUIPO);
 
         // Mostrar datos generales.
         System.out.println(ANSI_CYAN + "###   DATOS GENERALES   ###" + ANSI_BLUE);
         empresa1.mostrarEmpresa();
         empresa1.mostrarPuestosDeTrabajo();
+        System.out.print(ANSI_RESET);
     }
 }
