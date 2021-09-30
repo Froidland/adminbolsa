@@ -18,7 +18,7 @@ public class PuestoDeTrabajo {
         this.vacantes = vacantes;
         this.disponibilidad = false;
         this.requisitos = new ArrayList<>();
-        postulantes = new HashMap<>();
+        this.postulantes = new HashMap<>();
     }
 
     public UUID getUUID() {
@@ -87,7 +87,10 @@ public class PuestoDeTrabajo {
     public void quitarRequisito(Requisito requisito) {
         this.requisitos.remove(requisito);
     }
-
+    /**
+     * Metodo que elimina un postulante, debe recibir el rut del postulante que se busca eliminar.
+     * @param rut 
+     */
     public void quitarPostulante(String rut) {
         String borrar = null;
         for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
@@ -99,8 +102,14 @@ public class PuestoDeTrabajo {
         postulantes.remove(borrar);
         if (borrar == null)
             System.out.println("No se ha podido quitar el postulante porque no se encontró.");
+        else
+            System.out.println("Postulante eliminado.");
     }
-
+    /**
+     * Metodo que busca un postulante, debe recibir el rut del postulante que se busca.
+     * @param rut
+     * @return Este metodo retorna el postulante si es encontrado, en caso contrario retorna null.
+     */
     public Postulante buscarPostulante(String rut) {
         for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
             if (iterator.getKey().equals(rut)) {
@@ -109,7 +118,9 @@ public class PuestoDeTrabajo {
         }
         return null;
     }
-
+    /**
+     * Este metodo muestra los requisitos de un puesto de trabajo.
+     */
     public void mostrarRequisitos() {
         System.out.println("Requisitos: ");
 
@@ -125,11 +136,17 @@ public class PuestoDeTrabajo {
 
         System.out.println();
     }
-
+    /**
+     * Este metodo recibe un requisito y revisa si se encuentra dentro de los requisitos que tiene un puesto de trabajo.
+     * @param requisito
+     * @return true o false dependiendo de si el requisito fue encontrado.
+     */
     public boolean hasRequisito(Requisito requisito) {
         return this.requisitos.contains(requisito);
     }
-
+    /**
+     * Metodo para listar los postulantes de un puesto de trabajo.
+     */
     public void mostrarPostulantes() {
         int i = 1;
 
@@ -139,7 +156,10 @@ public class PuestoDeTrabajo {
             System.out.println();
         }
     }
-
+    /**
+     * Metodo que muestra los postulantes de un puesto de trabajo, siempre que tengan la competencia que se requiere. 
+     * @param competencia Competencia que se espera tengan los postulantes a mostrar.
+     */
     public void mostrarPostulantes(Competencia competencia) {
         int i = 1;
 

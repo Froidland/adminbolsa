@@ -35,4 +35,5 @@ public enum Competencia {
     SOCIABILIDAD,
     TENACIDAD,
     TRABAJO_EN_EQUIPO
-    }
+}
+

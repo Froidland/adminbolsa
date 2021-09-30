@@ -3,6 +3,9 @@ package com.bolsa;
 import java.util.UUID;
 
 public class Test {
+    /**
+     * Metodo que se utiliza para testear los metodos del proyecto.
+     */
     public static void runTest() {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_BLACK = "\u001B[30m";

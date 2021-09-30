@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Setup {
+    /**
+     * Este m�todo pide los datos para crear la empresa, sin embargo el llenado ser� automatico hasta que se desarrolle la base de datos del proyecto.
+     * @throws IOException 
+     */
     public static void run() throws IOException {
-        BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
+/*        BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
         String datoRut, datoNombre, datoDireccion, datoWeb, datoCorreo, datoTelefono;
 
         System.out.println("###   MENU INICIAL   ###");
@@ -31,6 +35,15 @@ public class Setup {
                 datoWeb,
                 datoCorreo,
                 datoTelefono
+        ); */
+      
+        Main.empresa = new Empresa(
+                "79814271-2",
+                "Discord",
+                "2559 Ridenour Street, MOUNT CLEMENS, Michigan",
+                "https://discord.com/",
+                "support@discordapp.com",
+                "305-999-9880"
         );
     }
 }
