@@ -87,7 +87,7 @@ public class Empresa {
         this.puestosDeTrabajo.add(puesto);
     }
     /**
-     * Este metodo busca un puesto de trabajo, para ello debe recibir el UUID del puesto buscado, en caso de no encontrar el puesto retornará null.
+     * Este metodo busca un puesto de trabajo, para ello debe recibir el UUID del puesto buscado, en caso de no encontrar el puesto retornarÃ¡ null.
      * @param uuid
      * @return 
      */
@@ -109,7 +109,7 @@ public class Empresa {
         }
         puestosDeTrabajo.remove(borrar);
         if (borrar == null)
-            System.out.println("No se ha podido quitar el postulante porque no se encontró.");
+            System.out.println("No se ha podido quitar el postulante porque no se encontrÃ³.");
         else
             System.out.println("Postulante eliminado.");
     }
@@ -129,7 +129,7 @@ public class Empresa {
         System.out.println();
     }
     /**
-     * Método sin parametros que listará todos los puestos de trabajo de una empresa.
+     * MÃ©todo sin parametros que listarÃ¡ todos los puestos de trabajo de una empresa.
      */
     public void mostrarPuestosDeTrabajo() {
         int i = 1;
@@ -137,12 +137,12 @@ public class Empresa {
         System.out.println("###   Puestos de trabajo   ###");
         if (!this.puestosDeTrabajo.isEmpty()) {
             for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-                System.out.printf("###   Puesto N°%d   ###\n", i++);
+                System.out.printf("###   Puesto NÂ°%d   ###\n", i++);
                 System.out.println("ID: " + puesto.getUUID());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
                 System.out.println("Vacantes: " + puesto.getVacantes());
-                System.out.print("¿Esta disponible?: ");
+                System.out.print("Â¿Esta disponible?: ");
 
                 if (puesto.isDisponible()) {
                     System.out.println("Si.");
@@ -162,7 +162,7 @@ public class Empresa {
     }
 
     /**
-     * Método para listar puestos de trabajo según su disponibilidad.
+     * MÃ©todo para listar puestos de trabajo segÃºn su disponibilidad.
      * @param disponibilidad Valor (si/no) que determina si se muestran los puestos de trabajo que estan disponibles o los sin disponibilidad.
      */
     public void mostrarPuestosDeTrabajo(boolean disponibilidad) {
@@ -173,7 +173,7 @@ public class Empresa {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
             if (puesto.isDisponible() == disponibilidad) {
                 flagEncontrado = true;
-                System.out.printf("###   Puesto N°%d   ###\n", i++);
+                System.out.printf("###   Puesto NÂ°%d   ###\n", i++);
                 System.out.println("ID: " + puesto.getUUID());
                 System.out.println("Nombre: " + puesto.getNombre());
                 System.out.println("Sueldo Base: " + puesto.getSueldoBase());
@@ -192,8 +192,8 @@ public class Empresa {
         }
     }
     /**
-     * Método que lista los puestos de trabajo deacuerdo a un requisito.
-     * @param requisito Es el requisito que se espera que tengan los puestos de trabajo que se listarán.
+     * MÃ©todo que lista los puestos de trabajo deacuerdo a un requisito.
+     * @param requisito Es el requisito que se espera que tengan los puestos de trabajo que se listarÃ¡n.
      */
     public void mostrarPuestosDeTrabajo(Requisito requisito) {
         int i = 1;

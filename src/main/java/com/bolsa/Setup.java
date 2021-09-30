@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class Setup {
     /**
-     * Este método pide los datos para crear la empresa, sin embargo el llenado será automatico hasta que se desarrolle la base de datos del proyecto.
+     * Este mï¿½todo pide los datos para crear la empresa, sin embargo el llenado serï¿½ automatico hasta que se desarrolle la base de datos del proyecto.
      * @throws IOException 
      */
     public static void run() throws IOException {
@@ -35,8 +35,8 @@ public class Setup {
                 datoWeb,
                 datoCorreo,
                 datoTelefono
-        );
-*/
+        ); */
+      
         Main.empresa = new Empresa(
                 "79814271-2",
                 "Discord",

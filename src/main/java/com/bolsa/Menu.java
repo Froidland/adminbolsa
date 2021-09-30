@@ -14,6 +14,7 @@ public class Menu {
      * Metodo que lista las opciones del menu y solicita al usuario escoger lo que necesita realizar mediante una opcion numerica.
      * @throws IOException 
      */
+
     public static void runConsole() throws IOException {
 
         while (true) {
@@ -76,10 +77,12 @@ public class Menu {
             }
         }
     }
+  
     /**
      * Metodo que solicita al usuario ingresar los datos del puesto de trabajo que desea crear.
      * @throws IOException 
      */
+
     private static void menuCrearPuestoTrabajo() throws IOException {
         String datoNombre, datoDisponibilidad;
         int datoSueldo, datoVacantes;
@@ -104,14 +107,16 @@ public class Menu {
 
         Main.empresa.anadirPuestoDeTrabajo(puestoNuevo);
     }
+
     /**
-     * Metodo que solicita al usuario los datos del postulante a crear y tambien pregunta a que puesto de trabajo desea añadirlo.
+     * Metodo que solicita al usuario los datos del postulante a crear y tambien pregunta a que puesto de trabajo desea aï¿½adirlo.
      * @throws IOException 
      */
     private static void menuCrearPostulante() throws IOException {
         //TODO: Implementar sistema de paginas.
         String datoNombre, datoFecha, datoRut, datoDireccion, datoCorreo, datoTelefono;
         int opcion = 0;
+
 
         System.out.println("###   CREAR POSTULANTE   ###");
         System.out.println("Ingrese el nombre del postulante: ");
@@ -207,7 +212,7 @@ public class Menu {
         ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
 
         while (true) {
-            System.out.println("¿De que puesto desea eliminar el postulante?: ");
+            System.out.println("ï¿½De que puesto desea eliminar el postulante?: ");
             for (PuestoDeTrabajo puesto : copiaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
@@ -226,7 +231,7 @@ public class Menu {
 
             System.out.println("Porfavor ingrese una opcion valida.");
         }
-        System.out.println("¿Que postulante desea eliminar?: ");
+        System.out.println("ï¿½Que postulante desea eliminar?: ");
         copiaPuestos.get(opcion - 1).mostrarPostulantes();
         System.out.println("Ingrese el Rut del postulante a eliminar: ");
         
@@ -240,7 +245,7 @@ public class Menu {
         ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
 
         while (true) {
-            System.out.println("¿Que puesto de trabajo desea eliminar?: ");
+            System.out.println("ï¿½Que puesto de trabajo desea eliminar?: ");
             for (PuestoDeTrabajo puesto : copiaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
@@ -261,6 +266,7 @@ public class Menu {
         }
 
         Main.empresa.eliminarPuestoDeTrabajo(copiaPuestos.get(opcion - 1).getUUID());
+
     }
 
     private static void clearScreen() {

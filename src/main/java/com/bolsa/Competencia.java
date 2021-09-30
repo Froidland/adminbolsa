@@ -36,3 +36,4 @@ public enum Competencia {
     TENACIDAD,
     TRABAJO_EN_EQUIPO
 }
+
