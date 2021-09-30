@@ -112,3 +112,6 @@ nbdist/
 .nb-gradle/
 # Auto added
 /target/
+/.classpath
+/.project
+/.settings/
