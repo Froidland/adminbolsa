@@ -183,7 +183,7 @@ public class Empresa {
                 puesto.mostrarRequisitos();
 
                 System.out.println("###   Lista de postulantes   ###");
-                puesto.mostrarPostulantes();
+                puesto.mostrarPostulantesResumido();
             }
         }
 
@@ -213,7 +213,7 @@ public class Empresa {
                 puesto.mostrarRequisitos();
 
                 System.out.println("###   Lista de postulantes   ###");
-                puesto.mostrarPostulantes();
+                puesto.mostrarPostulantesResumido();
             }
         }
 
