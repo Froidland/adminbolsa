@@ -171,4 +171,13 @@ public class PuestoDeTrabajo {
             }
         }
     }
+    public void mostrarPostulantesResumido() {
+        int i = 1;
+
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            System.out.print(i + ". ");
+            postulantes.get(iterator.getKey()).mostrarPostulanteResumido();
+            System.out.println();
+        }
+    }
 }
