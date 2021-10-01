@@ -7,7 +7,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Menu {
-    //TODO: Implementar verificacion de datos.
+    //TODO: Implementar verificacion de datos en todos los metodos.
+    //TODO: Implementar sistema de paginas en la interfaz grafica.
 
     private static BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
     /**
@@ -26,8 +27,8 @@ public class Menu {
             System.out.println("4. Mostrar postulantes.");
             System.out.println("5. Eliminar un puesto de trabajo.");
             System.out.println("6. Eliminar un postulante.");
-        //    System.out.println("7. Modificar un puesto de trabajo.");
-        //    System.out.println("8. Modificar un postulante.");
+            System.out.println("7. Modificar un puesto de trabajo.");
+            System.out.println("8. Modificar un postulante.");
             System.out.println("0. Salir.");
             System.out.println("-1. Ejecutar prueba.");
 
@@ -59,14 +60,14 @@ public class Menu {
                     clearScreen();
                     menuEliminarPostulante();
                     break;
-            /*    case 7:
+                case 7:
                     clearScreen();
                     menuModificarPuestoDeTrabajo();
                     break;
                 case 8:
                     clearScreen();
                     menuModificarPostulante();
-                    break;*/
+                    break;
                 case 0:
                     return;
                 case -1:
@@ -113,7 +114,6 @@ public class Menu {
      * @throws IOException 
      */
     private static void menuCrearPostulante() throws IOException {
-        //TODO: Implementar sistema de paginas.
         String datoNombre, datoFecha, datoRut, datoDireccion, datoCorreo, datoTelefono;
         int opcion = 0;
 
@@ -145,15 +145,15 @@ public class Menu {
         ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
 
         while (true) {
-            System.out.println("¿A que puesto de trabajo desearia añadir este postulante?: ");
+            System.out.println("A que puesto de trabajo desearia añadir este postulante?: ");
             for (PuestoDeTrabajo puesto : copiaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
             }
-            System.out.println("-1. Cancelar la operacion.");
+            System.out.println("0. Cancelar la operacion.");
 
             opcion = Integer.parseInt(lectura.readLine());
 
-            if (opcion == -1) {
+            if (opcion == 0) {
                 return;
             }
 
@@ -181,16 +181,16 @@ public class Menu {
         ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
 
         while (true) {
-            System.out.println("¿De que puesto desea listar los postulantes?: ");
+            System.out.println("De que puesto desea listar los postulantes?: ");
             for (PuestoDeTrabajo puesto : copiaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
-            System.out.println("-1. Cancelar la operacion.");
+            System.out.println("0. Cancelar la operacion.");
 
             opcion = Integer.parseInt(lectura.readLine());
 
-            if (opcion == -1) {
+            if (opcion == 0) {
                 return;
             }
 
@@ -201,7 +201,7 @@ public class Menu {
             System.out.println("Porfavor ingrese una opcion valida.");
         }
 
-        copiaPuestos.get(opcion - 1).mostrarPostulantes();
+        copiaPuestos.get(opcion - 1).mostrarPostulantesResumido();
     }
     /**
      * Metodo para eliminar un postulante de un puesto de trabajo. se le pregunta al usuario el puesto de trabajo y el postulante que desea eliminar.
@@ -212,16 +212,16 @@ public class Menu {
         ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
 
         while (true) {
-            System.out.println("�De que puesto desea eliminar el postulante?: ");
+            System.out.println("De que puesto desea eliminar el postulante?: ");
             for (PuestoDeTrabajo puesto : copiaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
-            System.out.println("-1. Cancelar la operacion.");
+            System.out.println("0. Cancelar la operacion.");
 
             opcion = Integer.parseInt(lectura.readLine());
 
-            if (opcion == -1) {
+            if (opcion == 0) {
                 return;
             }
 
@@ -231,12 +231,11 @@ public class Menu {
 
             System.out.println("Porfavor ingrese una opcion valida.");
         }
-        System.out.println("�Que postulante desea eliminar?: ");
-        copiaPuestos.get(opcion - 1).mostrarPostulantes();
-        System.out.println("Ingrese el Rut del postulante a eliminar: ");
-        
-        String rutElegido = lectura.readLine();
-        copiaPuestos.get(opcion - 1).quitarPostulante(rutElegido);
+        copiaPuestos.get(opcion - 1).mostrarPostulantesResumido();
+        System.out.println("Ingrese el RUT del postulante a eliminar: ");
+
+        String rutEscogido = lectura.readLine();
+        copiaPuestos.get(opcion - 1).quitarPostulante(rutEscogido);
         
     }
     
@@ -245,16 +244,16 @@ public class Menu {
         ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
 
         while (true) {
-            System.out.println("�Que puesto de trabajo desea eliminar?: ");
+            System.out.println("Que puesto de trabajo desea eliminar?: ");
             for (PuestoDeTrabajo puesto : copiaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
-            System.out.println("-1. Cancelar la operacion.");
+            System.out.println("0. Cancelar la operacion.");
 
             opcion = Integer.parseInt(lectura.readLine());
 
-            if (opcion == -1) {
+            if (opcion == 0) {
                 return;
             }
 
@@ -266,7 +265,145 @@ public class Menu {
         }
 
         Main.empresa.eliminarPuestoDeTrabajo(copiaPuestos.get(opcion - 1).getUUID());
+    }
 
+    private static void menuModificarPuestoDeTrabajo() throws IOException {
+        int opcion = 0, i = 1, datoInt;
+        String datoString;
+        PuestoDeTrabajo puestoSeleccionado;
+        ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
+
+        while (true) {
+            System.out.println("Que puesto de trabajo desea modificar?: ");
+            for (PuestoDeTrabajo puesto : copiaPuestos) {
+                System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
+                i++;
+            }
+            System.out.println("0. Cancelar la operacion.");
+
+            opcion = Integer.parseInt(lectura.readLine());
+
+            if (opcion == 0) {
+                return;
+            }
+
+            if (validarOpcion(opcion, 0, copiaPuestos.size())) {
+                break;
+            }
+
+            System.out.println("Porfavor ingrese una opcion valida.");
+        }
+
+        puestoSeleccionado = Main.empresa.buscarPuestoDeTrabajo(copiaPuestos.get(opcion - 1).getUUID());
+
+        while (true) {
+            System.out.println("Que atributo desea modificar?: ");
+            System.out.println("1. Nombre.");
+            System.out.println("2. Sueldo Base.");
+            System.out.println("3. Vacantes.");
+            System.out.println("4. Disponibilidad.");
+            System.out.println("0. Terminar operacion.");
+            opcion = Integer.parseInt(lectura.readLine());
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Ingrese un nombre nuevo: ");
+                    datoString = lectura.readLine();
+                    puestoSeleccionado.setNombre(datoString);
+                    break;
+                case 2:
+                    System.out.println("Ingrese un sueldo base nuevo: ");
+                    datoInt = Integer.parseInt(lectura.readLine());
+                    puestoSeleccionado.setSueldoBase(datoInt);
+                    break;
+                case 3:
+                    System.out.println("Ingrese una cantidad de vacantes nueva: ");
+                    datoInt = Integer.parseInt(lectura.readLine());
+                    puestoSeleccionado.setVacantes(datoInt);
+                    break;
+                case 4:
+                    System.out.println("Ingrese una disponibilidad nueva (Si/No): ");
+                    datoString = lectura.readLine();
+                    puestoSeleccionado.setDisponibilidad(datoString);
+                    break;
+                case 0:
+                    return;
+                default :
+                    System.out.println("Porfavor ingrese una opcion valida.");
+            }
+        }
+    }
+
+    private static void menuModificarPostulante() throws IOException {
+        int opcion = 0, i = 1;
+        String datoString;
+        ArrayList<PuestoDeTrabajo> copiaPuestos = Main.empresa.getPuestosDeTrabajo();
+
+        while (true) {
+            System.out.println("De que puesto desea modificar un postulante?: ");
+            for (PuestoDeTrabajo puesto : copiaPuestos) {
+                System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
+                i++;
+            }
+            System.out.println("0. Cancelar la operacion.");
+
+            opcion = Integer.parseInt(lectura.readLine());
+
+            if (opcion == 0) {
+                return;
+            }
+
+            if (validarOpcion(opcion, 0, copiaPuestos.size())) {
+                break;
+            }
+
+            System.out.println("Porfavor ingrese una opcion valida.");
+        }
+        System.out.println("Que postulante desea modificar?");
+        PuestoDeTrabajo puestoEscogido = copiaPuestos.get(opcion - 1);
+        puestoEscogido.mostrarPostulantesResumido();
+        System.out.println("Ingrese el RUT del postulante a modificar: ");
+
+        String rutEscogido = lectura.readLine();
+        Postulante postulanteEscogido = puestoEscogido.buscarPostulante(rutEscogido);
+
+        while (true) {
+            System.out.println("Que atributo desea modificar?: ");
+            System.out.println("1. Nombre.");
+            System.out.println("2. Direccion.");
+            System.out.println("3. Correo.");
+            System.out.println("4. Telefono.");
+            System.out.println("0. Terminar operacion.");
+            opcion = Integer.parseInt(lectura.readLine());
+
+            switch (opcion) {
+                case 1 :
+                    System.out.println("Ingrese un nombre nuevo: ");
+                    datoString = lectura.readLine();
+                    postulanteEscogido.setNombre(datoString);
+                    break;
+                case 2 :
+                    System.out.println("Ingrese una direccion nueva: ");
+                    datoString = lectura.readLine();
+                    postulanteEscogido.setDireccion(datoString);
+                    break;
+                case 3 :
+                    System.out.println("Ingrese un correo nuevo: ");
+                    datoString = lectura.readLine();
+                    postulanteEscogido.setCorreo(datoString);
+                    break;
+                case 4 :
+                    System.out.println("Ingrese un telefono nuevo: ");
+                    datoString = lectura.readLine();
+                    postulanteEscogido.setTelefono(datoString);
+                    break;
+                case 0 :
+                    return;
+
+                default :
+                    System.out.println("Porfavor ingrese una opcion valida.");
+            }
+        }
     }
 
     private static void clearScreen() {
