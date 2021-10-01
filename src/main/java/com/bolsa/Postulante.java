@@ -111,7 +111,7 @@ public class Postulante {
     public void mostrarPostulante() {
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Fecha de nacimiento: " + this.fechaDeNacimiento);
-        System.out.println("Rut: " + this.rut);
+        System.out.println("RUT: " + this.rut);
         System.out.println("Direccion: " + this.direccion);
         System.out.println("Correo: " + this.correo);
         System.out.println("Telefono: " + this.telefono);
@@ -124,5 +124,9 @@ public class Postulante {
                 System.out.println("- " + competencia.toString().replaceAll("_", " "));
             }
         }
+    }
+
+    public void mostrarPostulanteResumido() {
+        System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut);
     }
 }
