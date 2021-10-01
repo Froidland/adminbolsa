@@ -6,10 +6,10 @@ import java.io.IOException;
 
 public class Setup {
     /**
-     * Este m�todo pide los datos para crear la empresa, sin embargo el llenado ser� automatico hasta que se desarrolle la base de datos del proyecto.
-     * @throws IOException 
+     * Este metodo pide los datos para crear la empresa, sin embargo el llenado ser� automatico hasta que se desarrolle la base de datos del proyecto.
+     * //@throws IOException
      */
-    public static void run() throws IOException {
+    public static void run() {
 /*        BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
         String datoRut, datoNombre, datoDireccion, datoWeb, datoCorreo, datoTelefono;
 
