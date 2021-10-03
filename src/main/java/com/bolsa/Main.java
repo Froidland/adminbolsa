@@ -7,7 +7,15 @@ public class Main {
     public static Empresa empresa;
 
     public static void main(String[] args) throws IOException {
-        Setup.run();
+        empresa = new Empresa(
+                "PLACEHOLDER",
+                "PLACEHOLDER",
+                "PLACEHOLDER",
+                "PLACEHOLDER",
+                "PLACEHOLDER",
+                "PLACEHOLDER"
+        );
+
         Menu.runConsole();
     }
 }
