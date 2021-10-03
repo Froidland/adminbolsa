@@ -162,6 +162,7 @@ public class Empresa {
                     System.out.println("No.");
                 }
 
+                System.out.println("###   Requisitos   ###");
                 System.out.println();
                 puesto.mostrarRequisitos();
 
@@ -193,6 +194,8 @@ public class Empresa {
                 } else {
                     datos.append("No.\n\n");
                 }
+
+                datos.append("###   Requisitos   ###\n");
 
                 if (puesto.getRequisitos().isEmpty()) {
                     datos.append("- Ninguno.\n\n");
