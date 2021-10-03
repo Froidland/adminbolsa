@@ -126,6 +126,28 @@ public class Postulante {
         }
     }
 
+    public String obtenerStringDatosPostulante() {
+        StringBuilder datos = new StringBuilder();
+
+        datos.append("Nombre: ").append(this.nombre).append('\n');
+        datos.append("Fecha de nacimiento: ").append(this.fechaDeNacimiento).append('\n');
+        datos.append("RUT: ").append(this.rut).append('\n');
+        datos.append("Direccion: ").append(this.direccion).append('\n');
+        datos.append("Correo: ").append(this.correo).append('\n');
+        datos.append("Telefono: ").append(this.telefono).append('\n');
+        datos.append("Competencias: \n");
+
+        if (this.competencias.isEmpty()) {
+            datos.append("- Ninguna.\n");
+        } else {
+            for (Competencia competencia : this.competencias) {
+                datos.append("- ").append(competencia.toString().replaceAll("_", " ")).append('\n');
+            }
+        }
+
+        return datos.toString();
+    }
+
     public void mostrarPostulanteResumido() {
         System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut);
     }

@@ -157,7 +157,7 @@ public class PuestoDeTrabajo {
         }
     }
     /**
-     * Metodo que muestra los postulantes de un puesto de trabajo, siempre que tengan la competencia que se requiere. 
+     * Metodo que muestra los postulantes de un puesto de trabajo, siempre que tengan la competencia que se requiere.
      * @param competencia Competencia que se espera tengan los postulantes a mostrar.
      */
     public void mostrarPostulantes(Competencia competencia) {
@@ -171,6 +171,19 @@ public class PuestoDeTrabajo {
             }
         }
     }
+
+    public String obtenerStringDatosPostulantes() {
+        StringBuilder datos = new StringBuilder();
+        int i = 1;
+
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            datos.append("###   Postulante #").append(i++).append("   ###\n");
+            datos.append(postulantes.get(iterator.getKey()).obtenerStringDatosPostulante()).append('\n');
+        }
+
+        return datos.toString();
+    }
+
     public void mostrarPostulantesResumido() {
         int i = 1;
 

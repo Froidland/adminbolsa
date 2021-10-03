@@ -1,7 +1,9 @@
 package com.bolsa;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
+import com.bolsa.estructuras.parPuesto;
 
 public class Empresa {
     private String rut;
@@ -79,10 +81,6 @@ public class Empresa {
         this.telefono = telefono;
     }
 
-    public ArrayList<PuestoDeTrabajo> getPuestosDeTrabajo() {
-        return new ArrayList<>(this.puestosDeTrabajo);
-    }
-
     public void anadirPuestoDeTrabajo(PuestoDeTrabajo puesto) {
         this.puestosDeTrabajo.add(puesto);
     }
@@ -128,6 +126,20 @@ public class Empresa {
         System.out.println("Telefono: " + this.telefono);
         System.out.println();
     }
+
+    public String obtenerStringDatosEmpresa() {
+        StringBuilder datos = new StringBuilder();
+
+        datos.append("###   Empresa   ###\n");
+        datos.append("Rut: ").append(this.rut).append('\n');
+        datos.append("Nombre: ").append(this.nombre).append('\n');
+        datos.append("Direccion: ").append(this.direccion).append('\n');
+        datos.append("Pagina web: ").append(this.paginaWeb).append('\n');
+        datos.append("Correo: ").append(this.correo).append('\n');
+        datos.append("Telefono: ").append(this.telefono).append("\n\n");
+
+        return datos.toString();
+    }
     /**
      * Método sin parametros que listará todos los puestos de trabajo de una empresa.
      */
@@ -159,6 +171,48 @@ public class Empresa {
         } else {
             System.out.println("Esta empresa no tiene puestos de trabajo.");
         }
+    }
+
+    public String obtenerStringDatosPuestosDeTrabajo() {
+        int i = 1, j = 1;
+        StringBuilder datos = new StringBuilder();
+
+
+        datos.append("###   Puestos de trabajo   ###\n");
+        if (!this.puestosDeTrabajo.isEmpty()) {
+            for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+                datos.append("###   Puesto #").append(i++).append("   ###\n");
+                datos.append("ID: ").append(puesto.getUUID()).append('\n');
+                datos.append("Nombre: ").append(puesto.getNombre()).append('\n');
+                datos.append("Sueldo Base: ").append(puesto.getSueldoBase()).append('\n');
+                datos.append("Vacantes: ").append(puesto.getVacantes()).append('\n');
+                datos.append("¿Esta disponible?: ");
+
+                if (puesto.isDisponible()) {
+                    datos.append("Si.\n\n");
+                } else {
+                    datos.append("No.\n\n");
+                }
+
+                if (puesto.getRequisitos().isEmpty()) {
+                    datos.append("- Ninguno.\n\n");
+                } else {
+                    for (Requisito requisito : puesto.getRequisitos()) {
+                        datos.append("- ").append(requisito.toString().replaceAll("_", " ")).append('\n');
+                    }
+                }
+                datos.append('\n');
+
+
+                datos.append("###   Lista de postulantes   ###\n");
+                datos.append(puesto.obtenerStringDatosPostulantes());
+            }
+        } else {
+            datos.append("Esta empresa no tiene puestos de trabajo.\n");
+        }
+
+
+        return datos.toString();
     }
 
     /**
@@ -220,5 +274,15 @@ public class Empresa {
         if (!flagEncontrado) {
             System.out.println("Esta empresa no tiene puestos de trabajo que contengan el requisito " + requisito.name() + ".");
         }
+    }
+
+    public ArrayList<parPuesto> obtenerParPuestosDeTrabajo() {
+        ArrayList<parPuesto> listaPuestos = new ArrayList<>();
+
+        for (PuestoDeTrabajo puesto : puestosDeTrabajo) {
+            listaPuestos.add(new parPuesto(puesto.getNombre(), puesto.getUUID()));
+        }
+
+        return listaPuestos;
     }
 }
