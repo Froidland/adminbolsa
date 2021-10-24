@@ -2,7 +2,7 @@ package com.bolsa;
 
 import java.util.*;
 
-public class PuestoDeTrabajo {
+public class PuestoDeTrabajo implements Disponibilidad{
     private UUID id;
     private String nombre;
     private int sueldoBase;
@@ -10,6 +10,7 @@ public class PuestoDeTrabajo {
     private boolean disponibilidad;
     private ArrayList<Requisito> requisitos;
     private HashMap<String, Postulante> postulantes;
+    //private ArrayList<Postulante> postulantesSeleccionados;
 
     public PuestoDeTrabajo(String nombre, int sueldoBase, int vacantes) {
         this.id = UUID.randomUUID();
@@ -19,6 +20,7 @@ public class PuestoDeTrabajo {
         this.disponibilidad = false;
         this.requisitos = new ArrayList<>();
         this.postulantes = new HashMap<>();
+        //this.postulantesSeleccionados = new ArrayList<Postulante>();
     }
 
     public UUID getUUID() {
@@ -67,12 +69,12 @@ public class PuestoDeTrabajo {
 
     public void setDisponibilidad(String disponibilidad) {
         if (disponibilidad.toLowerCase().contentEquals("si")) {
-            this.disponibilidad = true;
+            this.disponibilidad = Disponibilidad.DISPONIBLE;
             return;
         }
 
         if (disponibilidad.toLowerCase().contentEquals("no")) {
-            this.disponibilidad = false;
+            this.disponibilidad = Disponibilidad.NODISPONIBLE;
         }
     }
 
@@ -178,7 +180,7 @@ public class PuestoDeTrabajo {
 
         for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
             datos.append("###   Postulante #").append(i++).append("   ###\n");
-            datos.append(postulantes.get(iterator.getKey()).obtenerStringDatosPostulante()).append('\n');
+            datos.append(postulantes.get(iterator.getKey()).toString()).append('\n');
         }
 
         return datos.toString();
