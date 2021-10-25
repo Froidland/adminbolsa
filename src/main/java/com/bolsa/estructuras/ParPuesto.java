@@ -4,12 +4,12 @@ import com.bolsa.Disponibilidad;
 
 import java.util.UUID;
 
-public class parPuesto implements Disponibilidad {
+public class ParPuesto implements Disponibilidad {
     private String nombre;
     private UUID uuid;
     private boolean disponibilidad;
 
-    public parPuesto(String nombre, UUID uuid) {
+    public ParPuesto(String nombre, UUID uuid) {
         this.nombre = nombre;
         this.uuid = uuid;
         this.disponibilidad = Disponibilidad.NODISPONIBLE;

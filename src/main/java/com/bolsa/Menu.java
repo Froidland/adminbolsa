@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import com.bolsa.estructuras.parPuesto;
+import com.bolsa.estructuras.ParPuesto;
 
 public class Menu {
     //TODO: Implementar verificacion de datos en todos los metodos.
@@ -149,11 +149,11 @@ public class Menu {
         );
 
         int i = 1;
-        ArrayList<parPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
+        ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
             System.out.println("A que puesto de trabajo desearia añadir este postulante?: ");
-            for (parPuesto puesto : listaPuestos) {
+            for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
             }
             System.out.println("0. Cancelar la operacion.");
@@ -185,11 +185,11 @@ public class Menu {
      */
     private static void menuMostrarPostulantes() throws IOException {
         int opcion = 0, i = 1;
-        ArrayList<parPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
+        ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
             System.out.println("De que puesto desea listar los postulantes?: ");
-            for (parPuesto puesto : listaPuestos) {
+            for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
@@ -216,11 +216,11 @@ public class Menu {
      */
     private static void menuEliminarPostulante() throws IOException {
         int opcion = 0, i = 1;
-        ArrayList<parPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
+        ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
             System.out.println("De que puesto desea eliminar el postulante?: ");
-            for (parPuesto puesto : listaPuestos) {
+            for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
@@ -248,11 +248,11 @@ public class Menu {
     
     private static void menuEliminarPuestoDeTrabajo() throws IOException {
         int opcion = 0, i = 1;
-        ArrayList<parPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
+        ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
             System.out.println("Que puesto de trabajo desea eliminar?: ");
-            for (parPuesto puesto : listaPuestos) {
+            for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
@@ -278,11 +278,11 @@ public class Menu {
         int opcion = 0, i = 1, datoInt;
         String datoString;
         PuestoDeTrabajo puestoSeleccionado;
-        ArrayList<parPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
+        ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
             System.out.println("Que puesto de trabajo desea modificar?: ");
-            for (parPuesto puesto : listaPuestos) {
+            for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
@@ -344,11 +344,11 @@ public class Menu {
     private static void menuModificarPostulante() throws IOException {
         int opcion = 0, i = 1;
         String datoString;
-        ArrayList<parPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
+        ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
             System.out.println("De que puesto desea modificar un postulante?: ");
-            for (parPuesto puesto : listaPuestos) {
+            for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
                 i++;
             }
@@ -367,7 +367,7 @@ public class Menu {
             System.out.println("Porfavor ingrese una opcion valida.");
         }
         System.out.println("Que postulante desea modificar?");
-        parPuesto puestoEscogido = listaPuestos.get(opcion - 1);
+        ParPuesto puestoEscogido = listaPuestos.get(opcion - 1);
         Main.empresa.buscarPuestoDeTrabajo(listaPuestos.get(opcion - 1).getUUID()).mostrarPostulantesResumido();
         System.out.println("Ingrese el RUT del postulante a modificar: ");
 

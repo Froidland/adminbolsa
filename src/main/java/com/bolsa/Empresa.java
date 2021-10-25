@@ -1,9 +1,8 @@
 package com.bolsa;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.UUID;
-import com.bolsa.estructuras.parPuesto;
+import com.bolsa.estructuras.ParPuesto;
 
 public class Empresa {
     private String rut;
@@ -279,11 +278,11 @@ public class Empresa {
         }
     }
 
-    public ArrayList<parPuesto> obtenerParPuestosDeTrabajo() {
-        ArrayList<parPuesto> listaPuestos = new ArrayList<>();
+    public ArrayList<ParPuesto> obtenerParPuestosDeTrabajo() {
+        ArrayList<ParPuesto> listaPuestos = new ArrayList<>();
 
         for (PuestoDeTrabajo puesto : puestosDeTrabajo) {
-            listaPuestos.add(new parPuesto(puesto.getNombre(), puesto.getUUID()));
+            listaPuestos.add(new ParPuesto(puesto.getNombre(), puesto.getUUID()));
         }
 
         return listaPuestos;
