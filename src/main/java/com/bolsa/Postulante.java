@@ -15,12 +15,12 @@ public abstract class Postulante implements Seleccionable {
 
     public Postulante() {
         this.nombre = "";
-        this.fechaDeNacimiento = LocalDate.EPOCH;
+        this.fechaDeNacimiento = LocalDate.MIN;
         this.rut = "";
         this.direccion = "";
         this.correo = "";
         this.telefono = "";
-        this.seleccionado = false;
+        this.seleccionado = Seleccionable.NOSELECCIONADO;
         this.competencias = new ArrayList<>();
     }
 
