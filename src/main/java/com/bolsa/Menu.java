@@ -79,6 +79,7 @@ public class Menu {
                 case 10:
                     clearScreen();
                     menuMostrarPracticanteMayorPromedio();
+                    break;
                 case 0:
                     if (Reporte.generarReporte()) {
                         System.out.println("Reporte generado con exito.");
