@@ -7,14 +7,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import com.bolsa.estructuras.ParPuesto;
 
+import javax.swing.*;
+
 public class Menu {
     //TODO: Implementar verificacion de datos en todos los metodos.
     //TODO: Implementar sistema de paginas en la interfaz grafica.
 
-    private static BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
+    private static final BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
+
     /**
-     * Metodo que lista las opciones del menu y solicita al usuario escoger lo que necesita realizar mediante una opcion numerica.
-     * @throws IOException 
+     * Metodo que lista las pciones del menu y solicita al usuario escoger lo que necesita realizar mediante una opcion numerica.
+     *
+     * @throws IOException
      */
 
     public static void runConsole() throws IOException {
@@ -55,7 +59,6 @@ public class Menu {
                 case 5:
                     clearScreen();
                     menuEliminarPuestoDeTrabajo();
-                                       
                     break;
                 case 6:
                     clearScreen();
@@ -69,9 +72,13 @@ public class Menu {
                     clearScreen();
                     menuModificarPostulante();
                     break;
-                case 9 :
+                case 9:
                     clearScreen();
                     menuModificarEmpresa();
+                    break;
+                case 10:
+                    clearScreen();
+                    runMenuGrafico();
                     break;
                 case 0:
                     if (Reporte.generarReporte()) {
@@ -85,10 +92,11 @@ public class Menu {
             }
         }
     }
-  
+
     /**
      * Metodo que solicita al usuario ingresar los datos del puesto de trabajo que desea crear.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
 
     private static void menuCrearPuestoTrabajo() throws IOException {
@@ -118,14 +126,34 @@ public class Menu {
 
     /**
      * Metodo que solicita al usuario los datos del postulante a crear y tambien pregunta a que puesto de trabajo desea a�adirlo.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     private static void menuCrearPostulante() throws IOException {
-        String datoNombre, datoFecha, datoRut, datoDireccion, datoCorreo, datoTelefono;
+        String datoNombre, datoFecha, datoRut, datoDireccion, datoCorreo, datoTelefono, datoTipoPostulante;
+        boolean esPracticante;
         int opcion = 0;
 
 
         System.out.println("###   CREAR POSTULANTE   ###");
+
+        System.out.println("Es el postulante titulado? (Si/No)");
+        while (true) {
+            datoTipoPostulante = lectura.readLine();
+
+            if (datoTipoPostulante.toLowerCase().contentEquals("si")) {
+                esPracticante = true;
+                break;
+            }
+
+            if (datoTipoPostulante.toLowerCase().contentEquals("no")) {
+                esPracticante = false;
+                break;
+            }
+
+            System.out.println("Porfavor ingrese una opcion valida.");
+        }
+
         System.out.println("Ingrese el nombre del postulante: ");
         datoNombre = lectura.readLine();
         System.out.println("Ingrese la fecha de nacimiento del postulante (aaaa-mm-dd): ");
@@ -139,14 +167,35 @@ public class Menu {
         System.out.println("Ingrese el telefono del postulante: ");
         datoTelefono = lectura.readLine();
 
-        Postulante postulanteNuevo = new Postulante(
-                datoNombre,
-                datoFecha,
-                datoRut,
-                datoDireccion,
-                datoCorreo,
-                datoTelefono
-        );
+        Postulante postulanteNuevo;
+
+        if (esPracticante) {
+            System.out.println("Ingrese el promedio de notas del postulante: ");
+            double datoPromedioDeNotas = Integer.parseInt(lectura.readLine());
+
+            postulanteNuevo = new PostulantePracticante(
+                    datoNombre,
+                    datoFecha,
+                    datoRut,
+                    datoDireccion,
+                    datoCorreo,
+                    datoTelefono,
+                    datoPromedioDeNotas
+            );
+        } else {
+            System.out.println("Ingrese la cantidad de años de experiencia que tiene el postulante: ");
+            int datoAnosDeExperiencia = Integer.parseInt(lectura.readLine());
+
+            postulanteNuevo = new PostulanteTitulado(
+                    datoNombre,
+                    datoFecha,
+                    datoRut,
+                    datoDireccion,
+                    datoCorreo,
+                    datoTelefono,
+                    datoAnosDeExperiencia
+            );
+        }
 
         int i = 1;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
@@ -173,15 +222,18 @@ public class Menu {
         PuestoDeTrabajo puestoSeleccionado = Main.empresa.buscarPuestoDeTrabajo(listaPuestos.get(opcion - 1).getUUID());
         puestoSeleccionado.anadirPostulante(postulanteNuevo);
     }
+
     /**
      * Metodo que muestra al usuario los puestos de trabajo existentes de la empresa.
      */
     private static void menuMostrarPuestosDeTrabajo() {
         Main.empresa.mostrarPuestosDeTrabajo();
     }
+
     /**
      * Metodo que le pregunta al usuario de que puesto de trabajo quiere listar los postulantes.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     private static void menuMostrarPostulantes() throws IOException {
         int opcion = 0, i = 1;
@@ -210,9 +262,11 @@ public class Menu {
 
         Main.empresa.buscarPuestoDeTrabajo(listaPuestos.get(opcion - 1).getUUID()).mostrarPostulantesResumido();
     }
+
     /**
      * Metodo para eliminar un postulante de un puesto de trabajo. se le pregunta al usuario el puesto de trabajo y el postulante que desea eliminar.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     private static void menuEliminarPostulante() throws IOException {
         int opcion = 0, i = 1;
@@ -245,7 +299,7 @@ public class Menu {
         Main.empresa.buscarPuestoDeTrabajo(listaPuestos.get(opcion - 1).getUUID()).quitarPostulante(rutEscogido);
 
     }
-    
+
     private static void menuEliminarPuestoDeTrabajo() throws IOException {
         int opcion = 0, i = 1;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
@@ -335,7 +389,7 @@ public class Menu {
                     break;
                 case 0:
                     return;
-                default :
+                default:
                     System.out.println("Porfavor ingrese una opcion valida.");
             }
         }
@@ -384,30 +438,30 @@ public class Menu {
             opcion = Integer.parseInt(lectura.readLine());
 
             switch (opcion) {
-                case 1 :
+                case 1:
                     System.out.println("Ingrese un nombre nuevo: ");
                     datoString = lectura.readLine();
                     postulanteEscogido.setNombre(datoString);
                     break;
-                case 2 :
+                case 2:
                     System.out.println("Ingrese una direccion nueva: ");
                     datoString = lectura.readLine();
                     postulanteEscogido.setDireccion(datoString);
                     break;
-                case 3 :
+                case 3:
                     System.out.println("Ingrese un correo nuevo: ");
                     datoString = lectura.readLine();
                     postulanteEscogido.setCorreo(datoString);
                     break;
-                case 4 :
+                case 4:
                     System.out.println("Ingrese un telefono nuevo: ");
                     datoString = lectura.readLine();
                     postulanteEscogido.setTelefono(datoString);
                     break;
-                case 0 :
+                case 0:
                     return;
 
-                default :
+                default:
                     System.out.println("Porfavor ingrese una opcion valida.");
             }
         }
@@ -435,43 +489,47 @@ public class Menu {
             }
 
             switch (opcion) {
-                case 1 :
+                case 1:
                     System.out.println("Ingrese un RUT nuevo: ");
                     datoString = lectura.readLine();
                     Main.empresa.setRut(datoString);
                     break;
-                case 2 :
+                case 2:
                     System.out.println("Ingrese un nombre nuevo: ");
                     datoString = lectura.readLine();
                     Main.empresa.setNombre(datoString);
                     break;
-                case 3 :
+                case 3:
                     System.out.println("Ingrese una direccion nueva: ");
                     datoString = lectura.readLine();
                     Main.empresa.setDireccion(datoString);
                     break;
-                case 4 :
+                case 4:
                     System.out.println("Ingrese una pagina web nueva: ");
                     datoString = lectura.readLine();
                     Main.empresa.setPaginaWeb(datoString);
                     break;
-                case 5 :
+                case 5:
                     System.out.println("Ingrese un correo nuevo: ");
                     datoString = lectura.readLine();
                     Main.empresa.setCorreo(datoString);
                     break;
-                case 6 :
+                case 6:
                     System.out.println("Ingrese un telefono nuevo: ");
                     datoString = lectura.readLine();
                     Main.empresa.setTelefono(datoString);
                     break;
-                case 0 :
+                case 0:
                     return;
 
-                default :
+                default:
                     System.out.println("Porfavor ingrese una opcion valida.");
             }
         }
+    }
+
+    private static void runMenuGrafico() {
+        new MenuGrafico();
     }
 
     private static void clearScreen() {
