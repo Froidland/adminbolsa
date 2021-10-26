@@ -2,15 +2,15 @@ package com.bolsa;
 
 import java.util.*;
 
-public class PuestoDeTrabajo implements Disponibilidad{
+public class PuestoDeTrabajo implements Disponibilidad {
     private UUID id;
     private String nombre;
     private int sueldoBase;
     private int vacantes;
     private boolean disponibilidad;
-    private ArrayList<Requisito> requisitos;
+    private ArrayList<Competencia> competenciasRequeridas;
     private HashMap<String, Postulante> postulantes;
-    //private ArrayList<Postulante> postulantesSeleccionados;
+    private ArrayList<Postulante> postulantesSeleccionados;
 
     public PuestoDeTrabajo(String nombre, int sueldoBase, int vacantes) {
         this.id = UUID.randomUUID();
@@ -18,9 +18,9 @@ public class PuestoDeTrabajo implements Disponibilidad{
         this.sueldoBase = sueldoBase;
         this.vacantes = vacantes;
         this.disponibilidad = false;
-        this.requisitos = new ArrayList<>();
+        this.competenciasRequeridas = new ArrayList<>();
         this.postulantes = new HashMap<>();
-        //this.postulantesSeleccionados = new ArrayList<Postulante>();
+        this.postulantesSeleccionados = new ArrayList<Postulante>();
     }
 
     public UUID getUUID() {
@@ -55,8 +55,8 @@ public class PuestoDeTrabajo implements Disponibilidad{
         this.vacantes = vacantes;
     }
 
-    public ArrayList<Requisito> getRequisitos() {
-        return new ArrayList<>(this.requisitos);
+    public ArrayList<Competencia> getCompetenciasRequeridas() {
+        return new ArrayList<>(this.competenciasRequeridas);
     }
 
     public boolean isDisponible() {
@@ -82,16 +82,18 @@ public class PuestoDeTrabajo implements Disponibilidad{
         this.postulantes.put(nuevoPostulante.getRut(), nuevoPostulante);
     }
 
-    public void anadirRequisito(Requisito requisito) {
-        this.requisitos.add(requisito);
+    public void anadirCompetenciaRequerida(Competencia competencia) {
+        this.competenciasRequeridas.add(competencia);
     }
 
-    public void quitarRequisito(Requisito requisito) {
-        this.requisitos.remove(requisito);
+    public void quitarCompetenciaRequerida(Competencia competencia) {
+        this.competenciasRequeridas.remove(competencia);
     }
+
     /**
      * Metodo que elimina un postulante, debe recibir el rut del postulante que se busca eliminar.
-     * @param rut 
+     *
+     * @param rut
      */
     public void quitarPostulante(String rut) {
         String borrar = null;
@@ -107,8 +109,10 @@ public class PuestoDeTrabajo implements Disponibilidad{
         else
             System.out.println("Postulante eliminado.");
     }
+
     /**
      * Metodo que busca un postulante, debe recibir el rut del postulante que se busca.
+     *
      * @param rut
      * @return Este metodo retorna el postulante si es encontrado, en caso contrario retorna null.
      */
@@ -120,32 +124,36 @@ public class PuestoDeTrabajo implements Disponibilidad{
         }
         return null;
     }
-    /**
-     * Este metodo muestra los requisitos de un puesto de trabajo.
-     */
-    public void mostrarRequisitos() {
-        System.out.println("Requisitos: ");
 
-        if (this.requisitos.isEmpty()) {
+    /**
+     * Este metodo muestra las competencias requeridas de un puesto de trabajo.
+     */
+    public void mostrarCompetenciasRequeridas() {
+        System.out.println("Competencias requeridas: ");
+
+        if (this.competenciasRequeridas.isEmpty()) {
             System.out.println("- Ninguno.");
             System.out.println();
             return;
         }
 
-        for (Requisito requisito : this.requisitos) {
-            System.out.println("- " + requisito.toString().replaceAll("_", " "));
+        for (Competencia competencia : this.competenciasRequeridas) {
+            System.out.println("- " + competencia.toString().replaceAll("_", " "));
         }
 
         System.out.println();
     }
+
     /**
-     * Este metodo recibe un requisito y revisa si se encuentra dentro de los requisitos que tiene un puesto de trabajo.
-     * @param requisito
-     * @return true o false dependiendo de si el requisito fue encontrado.
+     * Este metodo recibe una competencia y revisa si se encuentra dentro de las competencias que tiene un puesto de trabajo.
+     *
+     * @param competencia
+     * @return true o false dependiendo de si la competencia fue encontrada.
      */
-    public boolean hasRequisito(Requisito requisito) {
-        return this.requisitos.contains(requisito);
+    public boolean hasCompetencia(Competencia competencia) {
+        return this.competenciasRequeridas.contains(competencia);
     }
+
     /**
      * Metodo para listar los postulantes de un puesto de trabajo.
      */
@@ -158,8 +166,10 @@ public class PuestoDeTrabajo implements Disponibilidad{
             System.out.println();
         }
     }
+
     /**
      * Metodo que muestra los postulantes de un puesto de trabajo, siempre que tengan la competencia que se requiere.
+     *
      * @param competencia Competencia que se espera tengan los postulantes a mostrar.
      */
     public void mostrarPostulantes(Competencia competencia) {
@@ -193,6 +203,41 @@ public class PuestoDeTrabajo implements Disponibilidad{
             System.out.print(i + ". ");
             postulantes.get(iterator.getKey()).mostrarPostulanteResumido();
             System.out.println();
+        }
+    }
+
+    public PostulantePracticante practicanteMayorPromedioEnPuesto() {
+        PostulantePracticante practicanteMayorPromedio = null;
+        double mayorPromedio = 0, promedioPracticanteActual = 0;
+
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            if (postulantes.get(iterator.getKey()) instanceof PostulantePracticante) {
+                promedioPracticanteActual = ((PostulantePracticante) postulantes.get(iterator.getKey())).getPromedioNotas();
+
+                if (promedioPracticanteActual > mayorPromedio) {
+                    mayorPromedio = promedioPracticanteActual;
+                    practicanteMayorPromedio = ((PostulantePracticante) postulantes.get(iterator.getKey()));
+                }
+            }
+        }
+        return practicanteMayorPromedio;
+    }
+
+    public void seleccionarPostulantes() {
+        int cantidadCompetenciasACumplir = this.competenciasRequeridas.size();
+
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            int cantidadCompetenciasPostulante = 0;
+
+            for (Competencia competencia : this.competenciasRequeridas) {
+                if (iterator.getValue().competencias.contains(competencia)) {
+                    cantidadCompetenciasPostulante++;
+                }
+            }
+
+            if (cantidadCompetenciasPostulante == cantidadCompetenciasACumplir) {
+                this.postulantesSeleccionados.add(iterator.getValue());
+            }
         }
     }
 }
