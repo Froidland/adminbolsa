@@ -5,9 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import com.bolsa.estructuras.ParPuesto;
 
-import javax.swing.*;
+import com.bolsa.estructuras.ParPuesto;
 
 public class Menu {
     //TODO: Implementar verificacion de datos en todos los metodos.
@@ -35,6 +34,7 @@ public class Menu {
             System.out.println("7. Modificar un puesto de trabajo.");
             System.out.println("8. Modificar un postulante.");
             System.out.println("9. Modificar datos de la empresa.");
+            System.out.println("10. Mostrar practicante con el mayor promedio");
             System.out.println("0. Generar reporte y salir.");
 
             int opcion = Integer.parseInt(lectura.readLine());
@@ -78,8 +78,7 @@ public class Menu {
                     break;
                 case 10:
                     clearScreen();
-                    runMenuGrafico();
-                    break;
+                    menuMostrarPracticanteMayorPromedio();
                 case 0:
                     if (Reporte.generarReporte()) {
                         System.out.println("Reporte generado con exito.");
@@ -132,7 +131,7 @@ public class Menu {
     private static void menuCrearPostulante() throws IOException {
         String datoNombre, datoFecha, datoRut, datoDireccion, datoCorreo, datoTelefono, datoTipoPostulante;
         boolean esPracticante;
-        int opcion = 0;
+        int opcion;
 
 
         System.out.println("###   CREAR POSTULANTE   ###");
@@ -170,8 +169,8 @@ public class Menu {
         Postulante postulanteNuevo;
 
         if (esPracticante) {
-            System.out.println("Ingrese el promedio de notas del postulante: ");
-            double datoPromedioDeNotas = Integer.parseInt(lectura.readLine());
+            System.out.println("Ingrese el promedio de notas del postulante (numeros decimales separados con punto): ");
+            double datoPromedioDeNotas = Double.parseDouble(lectura.readLine());
 
             postulanteNuevo = new PostulantePracticante(
                     datoNombre,
@@ -204,6 +203,7 @@ public class Menu {
             System.out.println("A que puesto de trabajo desearia añadir este postulante?: ");
             for (ParPuesto puesto : listaPuestos) {
                 System.out.println(i + ". Nombre: " + puesto.getNombre() + " | UUID: " + puesto.getUUID());
+                i++;
             }
             System.out.println("0. Cancelar la operacion.");
 
@@ -236,7 +236,7 @@ public class Menu {
      * @throws IOException
      */
     private static void menuMostrarPostulantes() throws IOException {
-        int opcion = 0, i = 1;
+        int opcion, i = 1;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
@@ -269,7 +269,7 @@ public class Menu {
      * @throws IOException
      */
     private static void menuEliminarPostulante() throws IOException {
-        int opcion = 0, i = 1;
+        int opcion, i = 1;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
@@ -301,7 +301,7 @@ public class Menu {
     }
 
     private static void menuEliminarPuestoDeTrabajo() throws IOException {
-        int opcion = 0, i = 1;
+        int opcion, i = 1;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
         while (true) {
@@ -329,7 +329,7 @@ public class Menu {
     }
 
     private static void menuModificarPuestoDeTrabajo() throws IOException {
-        int opcion = 0, i = 1, datoInt;
+        int opcion, i = 1, datoInt;
         String datoString;
         PuestoDeTrabajo puestoSeleccionado;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
@@ -396,7 +396,7 @@ public class Menu {
     }
 
     private static void menuModificarPostulante() throws IOException {
-        int opcion = 0, i = 1;
+        int opcion, i = 1;
         String datoString;
         ArrayList<ParPuesto> listaPuestos = Main.empresa.obtenerParPuestosDeTrabajo();
 
@@ -528,8 +528,8 @@ public class Menu {
         }
     }
 
-    private static void runMenuGrafico() {
-        new MenuGrafico();
+    private static void menuMostrarPracticanteMayorPromedio() {
+        Main.empresa.mostrarPracticanteMayorPromedio();
     }
 
     private static void clearScreen() {

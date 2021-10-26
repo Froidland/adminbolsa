@@ -2,6 +2,7 @@ package com.bolsa;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
 import com.bolsa.estructuras.ParPuesto;
 
 public class Empresa {
@@ -295,22 +296,38 @@ public class Empresa {
         return listaPuestos;
     }
 
+    /**
+     * Metodo que recorre cada puesto de trabajo creado en busca de practicantes. Se guarda en una variable el
+     * practicante con mayor promedio de notas dentro del puesto y se compara con otro practicante  de otro puesto
+     * que tambien tiene el mayor promedio de notas de ese puesto. Luego se muestra el practicante con mayor promedio
+     * de notas entre todos los puestos de trabajo.
+     */
+
     public void mostrarPracticanteMayorPromedio() {
         PostulantePracticante practicanteActual;
         String nombrePracticanteMayorPromedio = null;
         double mayorPromedio = 0, promedioActual;
+        boolean hayPromedio = false;
 
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
             practicanteActual = puesto.practicanteMayorPromedioEnPuesto();
-            promedioActual = practicanteActual.getPromedioNotas();
-
-            if (promedioActual > mayorPromedio) {
-                nombrePracticanteMayorPromedio = practicanteActual.getNombre();
-                mayorPromedio = promedioActual;
+            if (practicanteActual == null) {
+                System.out.println("No hay practicantes disponibles para el puesto " + puesto.getNombre() + " .");
+            } else {
+                hayPromedio = true;
+                promedioActual = practicanteActual.getPromedioNotas();
+                if (promedioActual > mayorPromedio) {
+                    nombrePracticanteMayorPromedio = practicanteActual.getNombre();
+                    mayorPromedio = promedioActual;
+                }
             }
         }
+        if (!hayPromedio) {
+            System.out.println("No se encontro ningun practicante disponible.");
+            return;
+        }
 
-        System.out.println("El practicante con el mayor promedio es " + nombrePracticanteMayorPromedio + " con un promedio de" + mayorPromedio);
+        System.out.println("El practicante con el mayor promedio es " + nombrePracticanteMayorPromedio + " con un promedio de " + mayorPromedio);
     }
 
     public void seleccionarPostulantesGlobal() {

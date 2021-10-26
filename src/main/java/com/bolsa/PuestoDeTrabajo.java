@@ -208,7 +208,7 @@ public class PuestoDeTrabajo implements Disponibilidad {
 
     public PostulantePracticante practicanteMayorPromedioEnPuesto() {
         PostulantePracticante practicanteMayorPromedio = null;
-        double mayorPromedio = 0, promedioPracticanteActual = 0;
+        double mayorPromedio = 0, promedioPracticanteActual;
 
         for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
             if (postulantes.get(iterator.getKey()) instanceof PostulantePracticante) {
@@ -236,6 +236,7 @@ public class PuestoDeTrabajo implements Disponibilidad {
             }
 
             if (cantidadCompetenciasPostulante == cantidadCompetenciasACumplir) {
+                iterator.getValue().seleccionar();
                 this.postulantesSeleccionados.add(iterator.getValue());
             }
         }

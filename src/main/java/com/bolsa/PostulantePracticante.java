@@ -28,6 +28,7 @@ public class PostulantePracticante extends Postulante {
     /**
      * Metodo que muestra un postulante junto con una lista de sus competencias.
      */
+    @Override
     public void mostrarPostulante() {
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Fecha de nacimiento: " + this.fechaDeNacimiento);
@@ -47,6 +48,7 @@ public class PostulantePracticante extends Postulante {
         }
     }
 
+    @Override
     public String toString() {
         StringBuilder datos = new StringBuilder();
 
@@ -70,6 +72,7 @@ public class PostulantePracticante extends Postulante {
         return datos.toString();
     }
 
+    @Override
     public void mostrarPostulanteResumido() {
         System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut + " | Estado: Practicante");
     }

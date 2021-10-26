@@ -1,5 +1,7 @@
 package com.bolsa;
 
+import com.bolsa.menugrafico.VentanaPrincipal;
+
 import java.io.IOException;
 
 public class Main {
@@ -15,7 +17,7 @@ public class Main {
                 "PLACEHOLDER",
                 "PLACEHOLDER"
         );
-
+        //new VentanaPrincipal();
         Menu.runConsole();
     }
 }

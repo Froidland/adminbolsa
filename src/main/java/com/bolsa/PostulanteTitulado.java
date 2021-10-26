@@ -25,6 +25,7 @@ public class PostulanteTitulado extends Postulante {
         this.competencias = new ArrayList<>();
     }
 
+    @Override
     public void mostrarPostulante() {
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Fecha de nacimiento: " + this.fechaDeNacimiento);
@@ -44,6 +45,7 @@ public class PostulanteTitulado extends Postulante {
         }
     }
 
+    @Override
     public String toString() {
         StringBuilder datos = new StringBuilder();
 
@@ -67,6 +69,7 @@ public class PostulanteTitulado extends Postulante {
         return datos.toString();
     }
 
+    @Override
     public void mostrarPostulanteResumido() {
         System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut + " | Estado: Titulado");
     }

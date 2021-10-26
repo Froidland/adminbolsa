@@ -93,28 +93,35 @@ public abstract class Postulante implements Seleccionable {
     public ArrayList<Competencia> getCompetencias() {
         return new ArrayList<>(this.competencias);
     }
+
     /**
      * Metodo que indica si un postulante tiene una competencia a traves de true o false.
-     * @param competencia 
-     * @return 
+     *
+     * @param competencia
+     * @return
      */
     public boolean hasCompetencia(Competencia competencia) {
         return this.competencias.contains(competencia);
     }
+
     /**
      * Metodo que añade una competencia a un postulante.
-     * @param competencia 
+     *
+     * @param competencia
      */
     public void anadirCompetencia(Competencia competencia) {
         this.competencias.add(competencia);
     }
+
     /**
      * Metodo que elimina una competencia de un postulante. Debe recibir la competencia que se desea eliminar.
-     * @param competencia 
+     *
+     * @param competencia
      */
     public void quitarCompetencia(Competencia competencia) {
         this.competencias.remove(competencia);
     }
+
     /**
      * Metodo que muestra un postulante junto con una lista de sus competencias.
      */
