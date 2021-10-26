@@ -137,7 +137,7 @@ public class Menu {
 
         System.out.println("###   CREAR POSTULANTE   ###");
 
-        System.out.println("Es el postulante titulado? (Si/No)");
+        System.out.println("Es el postulante practicante? (Si/No)");
         while (true) {
             datoTipoPostulante = lectura.readLine();
 
