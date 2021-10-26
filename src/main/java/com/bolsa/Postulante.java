@@ -3,22 +3,24 @@ package com.bolsa;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Postulante {
-    private String nombre;
-    private LocalDate fechaDeNacimiento;
-    private String rut;
-    private String direccion;
-    private String correo;
-    private String telefono;
-    private ArrayList<Competencia> competencias;
+public abstract class Postulante implements Seleccionable {
+    protected String nombre;
+    protected LocalDate fechaDeNacimiento;
+    protected String rut;
+    protected String direccion;
+    protected String correo;
+    protected String telefono;
+    protected boolean seleccionado;
+    protected ArrayList<Competencia> competencias;
 
-    public Postulante(String nombre, String fechaDeNacimiento, String rut, String direccion, String correo, String telefono) {
-        this.nombre = nombre;
-        this.fechaDeNacimiento = LocalDate.parse(fechaDeNacimiento);
-        this.rut = parseRut(rut);
-        this.direccion = direccion;
-        this.correo = correo;
-        this.telefono = telefono;
+    public Postulante() {
+        this.nombre = "";
+        this.fechaDeNacimiento = LocalDate.MIN;
+        this.rut = "";
+        this.direccion = "";
+        this.correo = "";
+        this.telefono = "";
+        this.seleccionado = Seleccionable.NOSELECCIONADO;
         this.competencias = new ArrayList<>();
     }
 
@@ -46,7 +48,7 @@ public class Postulante {
         this.rut = parseRut(rut);
     }
 
-    private String parseRut(String rut) {
+    protected String parseRut(String rut) {
         if (rut.charAt(rut.length() - 2) != '-') {
             String rutPreGuion = rut.substring(0, rut.length() - 1);
             return (rutPreGuion + '-' + rut.charAt(rut.length() - 1));
@@ -80,6 +82,14 @@ public class Postulante {
         this.telefono = telefono;
     }
 
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
+    }
+
     public ArrayList<Competencia> getCompetencias() {
         return new ArrayList<>(this.competencias);
     }
@@ -108,47 +118,13 @@ public class Postulante {
     /**
      * Metodo que muestra un postulante junto con una lista de sus competencias.
      */
-    public void mostrarPostulante() {
-        System.out.println("Nombre: " + this.nombre);
-        System.out.println("Fecha de nacimiento: " + this.fechaDeNacimiento);
-        System.out.println("RUT: " + this.rut);
-        System.out.println("Direccion: " + this.direccion);
-        System.out.println("Correo: " + this.correo);
-        System.out.println("Telefono: " + this.telefono);
-        System.out.println("Competencias: ");
-
-        if (this.competencias.isEmpty()) {
-            System.out.println("- Ninguna.");
-        } else {
-            for (Competencia competencia : this.competencias) {
-                System.out.println("- " + competencia.toString().replaceAll("_", " "));
-            }
-        }
+    public void seleccionar() {
+        this.seleccionado = Seleccionable.SELECCIONADO;
     }
 
-    public String obtenerStringDatosPostulante() {
-        StringBuilder datos = new StringBuilder();
+    public abstract void mostrarPostulante();
 
-        datos.append("Nombre: ").append(this.nombre).append('\n');
-        datos.append("Fecha de nacimiento: ").append(this.fechaDeNacimiento).append('\n');
-        datos.append("RUT: ").append(this.rut).append('\n');
-        datos.append("Direccion: ").append(this.direccion).append('\n');
-        datos.append("Correo: ").append(this.correo).append('\n');
-        datos.append("Telefono: ").append(this.telefono).append('\n');
-        datos.append("Competencias: \n");
+    public abstract String toString();
 
-        if (this.competencias.isEmpty()) {
-            datos.append("- Ninguna.\n");
-        } else {
-            for (Competencia competencia : this.competencias) {
-                datos.append("- ").append(competencia.toString().replaceAll("_", " ")).append('\n');
-            }
-        }
-
-        return datos.toString();
-    }
-
-    public void mostrarPostulanteResumido() {
-        System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut);
-    }
+    public abstract void mostrarPostulanteResumido();
 }
