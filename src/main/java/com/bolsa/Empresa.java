@@ -83,10 +83,12 @@ public class Empresa {
     public void anadirPuestoDeTrabajo(PuestoDeTrabajo puesto) {
         this.puestosDeTrabajo.add(puesto);
     }
+
     /**
      * Este metodo busca un puesto de trabajo, para ello debe recibir el UUID del puesto buscado, en caso de no encontrar el puesto retornará null.
+     *
      * @param uuid
-     * @return 
+     * @return
      */
     public PuestoDeTrabajo buscarPuestoDeTrabajo(UUID uuid) {
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
@@ -97,6 +99,7 @@ public class Empresa {
 
         return null;
     }
+
     public void eliminarPuestoDeTrabajo(UUID uuid) {
         PuestoDeTrabajo borrar = null;
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
@@ -110,7 +113,7 @@ public class Empresa {
         else
             System.out.println("Postulante eliminado.");
     }
-    
+
     /**
      * Metodo que muestra los datos de la empresa.
      */
@@ -139,6 +142,7 @@ public class Empresa {
 
         return datos.toString();
     }
+
     /**
      * Método sin parametros que listará todos los puestos de trabajo de una empresa.
      */
@@ -161,9 +165,9 @@ public class Empresa {
                     System.out.println("No.");
                 }
 
-                System.out.println("###   Requisitos   ###");
+                System.out.println("###   Competencias requeridas   ###");
                 System.out.println();
-                puesto.mostrarRequisitos();
+                puesto.mostrarCompetenciasRequeridas();
 
                 System.out.println("###   Lista de postulantes   ###");
                 puesto.mostrarPostulantes();
@@ -194,13 +198,13 @@ public class Empresa {
                     datos.append("No.\n\n");
                 }
 
-                datos.append("###   Requisitos   ###\n");
+                datos.append("###   Competencias requeridas   ###\n");
 
-                if (puesto.getRequisitos().isEmpty()) {
+                if (puesto.getCompetenciasRequeridas().isEmpty()) {
                     datos.append("- Ninguno.\n\n");
                 } else {
-                    for (Requisito requisito : puesto.getRequisitos()) {
-                        datos.append("- ").append(requisito.toString().replaceAll("_", " ")).append('\n');
+                    for (Competencia competencia : puesto.getCompetenciasRequeridas()) {
+                        datos.append("- ").append(competencia.toString().replaceAll("_", " ")).append('\n');
                     }
                 }
                 datos.append('\n');
@@ -219,6 +223,7 @@ public class Empresa {
 
     /**
      * Método para listar puestos de trabajo según su disponibilidad.
+     *
      * @param disponibilidad Valor (si/no) que determina si se muestran los puestos de trabajo que estan disponibles o los sin disponibilidad.
      */
     public void mostrarPuestosDeTrabajo(boolean disponibilidad) {
@@ -236,7 +241,7 @@ public class Empresa {
                 System.out.println("Vacantes: " + puesto.getVacantes());
 
                 System.out.println();
-                puesto.mostrarRequisitos();
+                puesto.mostrarCompetenciasRequeridas();
 
                 System.out.println("###   Lista de postulantes   ###");
                 puesto.mostrarPostulantesResumido();
@@ -247,17 +252,19 @@ public class Empresa {
             System.out.println("Esta empresa no tiene puestos de trabajo disponibles.");
         }
     }
+
     /**
-     * Método que lista los puestos de trabajo deacuerdo a un requisito.
-     * @param requisito Es el requisito que se espera que tengan los puestos de trabajo que se listarán.
+     * Método que lista los puestos de trabajo deacuerdo a una competencia.
+     *
+     * @param competencia Es la competencia que se espera que tengan los puestos de trabajo que se listarán.
      */
-    public void mostrarPuestosDeTrabajo(Requisito requisito) {
+    public void mostrarPuestosDeTrabajo(Competencia competencia) {
         int i = 1;
         boolean flagEncontrado = false;
 
         System.out.println("###   Puestos de trabajo   ###");
         for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
-            if (puesto.hasRequisito(requisito)) {
+            if (puesto.hasCompetencia(competencia)) {
                 flagEncontrado = true;
                 System.out.printf("###   Puesto #%d   ###\n", i++);
                 System.out.println("ID: " + puesto.getUUID());
@@ -266,7 +273,7 @@ public class Empresa {
                 System.out.println("Vacantes: " + puesto.getVacantes());
 
                 System.out.println();
-                puesto.mostrarRequisitos();
+                puesto.mostrarCompetenciasRequeridas();
 
                 System.out.println("###   Lista de postulantes   ###");
                 puesto.mostrarPostulantesResumido();
@@ -274,7 +281,7 @@ public class Empresa {
         }
 
         if (!flagEncontrado) {
-            System.out.println("Esta empresa no tiene puestos de trabajo que contengan el requisito " + requisito.name() + ".");
+            System.out.println("Esta empresa no tiene puestos de trabajo que contengan el requisito " + competencia.name() + ".");
         }
     }
 
@@ -286,5 +293,29 @@ public class Empresa {
         }
 
         return listaPuestos;
+    }
+
+    public void mostrarPracticanteMayorPromedio() {
+        PostulantePracticante practicanteActual;
+        String nombrePracticanteMayorPromedio = null;
+        double mayorPromedio = 0, promedioActual;
+
+        for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+            practicanteActual = puesto.practicanteMayorPromedioEnPuesto();
+            promedioActual = practicanteActual.getPromedioNotas();
+
+            if (promedioActual > mayorPromedio) {
+                nombrePracticanteMayorPromedio = practicanteActual.getNombre();
+                mayorPromedio = promedioActual;
+            }
+        }
+
+        System.out.println("El practicante con el mayor promedio es " + nombrePracticanteMayorPromedio + " con un promedio de" + mayorPromedio);
+    }
+
+    public void seleccionarPostulantesGlobal() {
+        for (PuestoDeTrabajo puesto : this.puestosDeTrabajo) {
+            puesto.seleccionarPostulantes();
+        }
     }
 }
