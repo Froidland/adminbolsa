@@ -38,15 +38,15 @@ public class VentanaCrearPostulante implements ActionListener, ItemListener {
         frame = new JFrame();
         panel = new JPanel();
 
-        // CheckBox instantiation
+        // CheckBox stuff
         esPracticanteCheckBox = new JCheckBox("Es practicante?");
         esPracticanteCheckBox.addItemListener(this);
 
-        // Button instantiation
+        // Button stuff
         confirmarButton = new JButton("Confirmar");
         confirmarButton.addActionListener(this);
 
-        //Label instantiation
+        // Label stuff
         JLabel datoNombreLabel = new JLabel("Nombre:");
         JLabel datoFechaNacimientoLabel = new JLabel("Fecha de nacimiento:");
         JLabel datoRutLabel = new JLabel("RUT:");
@@ -56,8 +56,8 @@ public class VentanaCrearPostulante implements ActionListener, ItemListener {
         JLabel datoPromedioNotasLabel = new JLabel("Promedio de notas:");
         JLabel datoAnosExperienciaLabel = new JLabel("Anos de experiencia:");
 
-        // TextField instantiation
-        datoNombreTextField = new JTextField("Postulante");
+        // TextField stuff
+        datoNombreTextField = new JTextField("Nombre postulante");
         datoFechaNacimientoTextField = new JTextField("yyyy-MM-dd");
         datoRutTextField = new JTextField("1111111-1");
         datoDireccionTextField = new JTextField("Hola como estas, 481");
@@ -87,7 +87,7 @@ public class VentanaCrearPostulante implements ActionListener, ItemListener {
         panel.add(datoPromedioNotasLabel).setBounds(10, 230, 120, 25);
         panel.add(datoAnosExperienciaLabel).setBounds(10, 260, 120, 25);
 
-        // Text fields panel stuff
+        // TextField panel stuff
         panel.add(datoNombreTextField).setBounds(140, 20, 165, 25);
         panel.add(datoFechaNacimientoTextField).setBounds(140, 50, 165, 25);
         panel.add(datoRutTextField).setBounds(140, 80, 165, 25);

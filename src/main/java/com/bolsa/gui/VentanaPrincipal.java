@@ -97,8 +97,7 @@ public class VentanaPrincipal implements ActionListener {
         Object source = e.getSource();
 
         if (source == crearPuestoDeTrabajoButton) {
-            //new VentanaCrearPuestoDeTrabajo();
-            new VentanaImplementacionFaltante();
+            new VentanaCrearPuestoDeTrabajo();
         }
 
         if (source == crearPostulanteButton) {
