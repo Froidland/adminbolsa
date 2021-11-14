@@ -6,20 +6,24 @@ import java.io.IOException;
 
 public class Reporte {
     public static boolean generarReporte() throws IOException {
-        try {
-            File reporteNuevo = new File("reporte.txt");
-            reporteNuevo.createNewFile();
-            FileWriter escritura = new FileWriter(reporteNuevo, true);
+        boolean creacionArchivoExitosa;
 
-            escritura.append(Main.empresa.obtenerStringDatosEmpresa());
-            escritura.flush();
-            escritura.append(Main.empresa.obtenerStringDatosPuestosDeTrabajo());
-            escritura.flush();
+        File reporteNuevo = new File("reporte.txt");
+        creacionArchivoExitosa = reporteNuevo.createNewFile();
 
-            escritura.close();
-        } catch (IOException e) {
+        if (!creacionArchivoExitosa) {
             return false;
         }
+
+        FileWriter escritura = new FileWriter(reporteNuevo, true);
+
+        escritura.append(Main.empresa.obtenerStringDatosEmpresa());
+        escritura.flush();
+        escritura.append(Main.empresa.obtenerStringDatosPuestosDeTrabajo());
+        escritura.flush();
+
+        escritura.close();
+
         return true;
     }
 }
