@@ -1,4 +1,4 @@
-package com.bolsa;
+package com.bolsa.interfaces;
 
 public interface Disponibilidad {
     public static final boolean DISPONIBLE = true;

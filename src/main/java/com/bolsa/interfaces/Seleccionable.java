@@ -1,4 +1,4 @@
-package com.bolsa;
+package com.bolsa.interfaces;
 
 public interface Seleccionable {
     public static final boolean SELECCIONADO = true;
