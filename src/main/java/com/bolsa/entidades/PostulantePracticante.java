@@ -1,4 +1,6 @@
-package com.bolsa;
+package com.bolsa.entidades;
+
+import com.bolsa.Competencia;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

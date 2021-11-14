@@ -1,8 +1,9 @@
-package com.bolsa;
+package com.bolsa.entidades;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.bolsa.Competencia;
 import com.bolsa.estructuras.ParPuesto;
 
 public class Empresa {

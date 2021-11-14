@@ -1,4 +1,7 @@
-package com.bolsa;
+package com.bolsa.entidades;
+
+import com.bolsa.Competencia;
+import com.bolsa.interfaces.Disponibilidad;
 
 import java.util.*;
 

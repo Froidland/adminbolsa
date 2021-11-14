@@ -1,4 +1,7 @@
-package com.bolsa;
+package com.bolsa.entidades;
+
+import com.bolsa.Competencia;
+import com.bolsa.interfaces.Seleccionable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
