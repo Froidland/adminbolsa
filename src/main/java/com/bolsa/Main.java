@@ -1,6 +1,8 @@
 package com.bolsa;
 
-import com.bolsa.menugrafico.VentanaPrincipal;
+import com.bolsa.entidades.Empresa;
+import com.bolsa.entidades.PuestoDeTrabajo;
+import com.bolsa.gui.VentanaPrincipal;
 
 import java.io.IOException;
 
@@ -17,7 +19,28 @@ public class Main {
                 "PLACEHOLDER",
                 "PLACEHOLDER"
         );
-        //new VentanaPrincipal();
-        Menu.runConsole();
+
+        empresa.anadirPuestoDeTrabajo(new PuestoDeTrabajo(
+                "Hola",
+                5000,
+                20
+        ));
+        empresa.anadirPuestoDeTrabajo(new PuestoDeTrabajo(
+                "Chao",
+                5000,
+                20
+        ));
+        empresa.anadirPuestoDeTrabajo(new PuestoDeTrabajo(
+                "Buenos dias",
+                5000,
+                20
+        ));
+        empresa.anadirPuestoDeTrabajo(new PuestoDeTrabajo(
+                "Buenas noches",
+                5000,
+                20
+        ));
+        new VentanaPrincipal();
+        //Menu.runConsole();
     }
 }

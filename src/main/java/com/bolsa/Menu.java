@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import com.bolsa.entidades.Postulante;
+import com.bolsa.entidades.PostulantePracticante;
+import com.bolsa.entidades.PostulanteTitulado;
+import com.bolsa.entidades.PuestoDeTrabajo;
 import com.bolsa.estructuras.ParPuesto;
 
 public class Menu {
@@ -20,7 +24,8 @@ public class Menu {
      * @throws IOException
      */
 
-    public static void runConsole() throws IOException {
+    public static void runConsole() {
+        int opcion;
 
         while (true) {
             System.out.println("###   MENU   ###");
@@ -37,16 +42,33 @@ public class Menu {
             System.out.println("10. Mostrar practicante con el mayor promedio");
             System.out.println("0. Generar reporte y salir.");
 
-            int opcion = Integer.parseInt(lectura.readLine());
+            try {
+                opcion = Integer.parseInt(lectura.readLine());
+            } catch (IOException e) {
+                System.out.println("Hubo un error con la entrada y salida del programa, por favor inténtelo de nuevo.");
+                continue;
+            }
 
             switch (opcion) {
                 case 1:
                     clearScreen();
-                    menuCrearPuestoTrabajo();
+                    try {
+                        menuCrearPuestoTrabajo();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 2:
                     clearScreen();
-                    menuCrearPostulante();
+                    try {
+                        menuCrearPostulante();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 3:
                     clearScreen();
@@ -54,38 +76,77 @@ public class Menu {
                     break;
                 case 4:
                     clearScreen();
-                    menuMostrarPostulantes();
+                    try {
+                        menuMostrarPostulantes();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    }
                     break;
                 case 5:
                     clearScreen();
-                    menuEliminarPuestoDeTrabajo();
+                    try {
+                        menuEliminarPuestoDeTrabajo();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 6:
                     clearScreen();
-                    menuEliminarPostulante();
+                    try {
+                        menuEliminarPostulante();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 7:
                     clearScreen();
-                    menuModificarPuestoDeTrabajo();
+                    try {
+                        menuModificarPuestoDeTrabajo();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 8:
                     clearScreen();
-                    menuModificarPostulante();
+                    try {
+                        menuModificarPostulante();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 9:
                     clearScreen();
-                    menuModificarEmpresa();
+                    try {
+                        menuModificarEmpresa();
+                    } catch (IOException e) {
+                        System.out.println("Hubo un error al procesar la entrada, por favor inténtelo de nuevo.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor escriba el numero con el formato correcto. Inténtelo de nuevo.");
+                    }
                     break;
                 case 10:
                     clearScreen();
                     menuMostrarPracticanteMayorPromedio();
                     break;
                 case 0:
-                    if (Reporte.generarReporte()) {
-                        System.out.println("Reporte generado con exito.");
-                    } else {
-                        System.out.println("Hubo un error al generar el reporte. La accion ha sido abortada.");
+                    boolean reporteExitoso = false;
+
+                    try {
+                        reporteExitoso = Reporte.generarReporte();
+                    } catch (IOException e) {
+                        System.out.println("Se ha generado una excepcion al intentar generar el reporte, por favor inténtelo de nuevo.");
+                        continue;
                     }
+
+                    System.out.println("Reporte generado con exito.");
                     return;
                 default:
                     System.out.println("Porfavor ingrese una opcion valida.");
@@ -129,8 +190,8 @@ public class Menu {
      *
      * @throws IOException
      */
-    private static void menuCrearPostulante() throws IOException {
-        String datoNombre, datoFecha, datoRut, datoDireccion, datoCorreo, datoTelefono, datoTipoPostulante;
+    private static void menuCrearPostulante() throws IOException, NumberFormatException {
+        String datoNombre, datoFechaNacimiento, datoRut, datoDireccion, datoCorreo, datoTelefono, datoTipoPostulante;
         boolean esPracticante;
         int opcion;
 
@@ -157,7 +218,7 @@ public class Menu {
         System.out.println("Ingrese el nombre del postulante: ");
         datoNombre = lectura.readLine();
         System.out.println("Ingrese la fecha de nacimiento del postulante (aaaa-mm-dd): ");
-        datoFecha = lectura.readLine();
+        datoFechaNacimiento = lectura.readLine();
         System.out.println("Ingrese el RUT del postulante: ");
         datoRut = lectura.readLine();
         System.out.println("Ingrese la direccion del postulante: ");
@@ -175,7 +236,7 @@ public class Menu {
 
             postulanteNuevo = new PostulantePracticante(
                     datoNombre,
-                    datoFecha,
+                    datoFechaNacimiento,
                     datoRut,
                     datoDireccion,
                     datoCorreo,
@@ -188,7 +249,7 @@ public class Menu {
 
             postulanteNuevo = new PostulanteTitulado(
                     datoNombre,
-                    datoFecha,
+                    datoFechaNacimiento,
                     datoRut,
                     datoDireccion,
                     datoCorreo,
