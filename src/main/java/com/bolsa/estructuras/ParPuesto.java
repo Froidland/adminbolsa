@@ -1,6 +1,6 @@
 package com.bolsa.estructuras;
 
-import com.bolsa.Disponibilidad;
+import com.bolsa.interfaces.Disponibilidad;
 
 import java.util.UUID;
 
