@@ -134,8 +134,7 @@ public class VentanaPrincipal implements ActionListener {
         }
 
         if (source == modificarDatosEmpresaButton) {
-            //new VentanaModificarDatosEmpresa();
-            new VentanaImplementacionFaltante();
+            new VentanaModificarDatosEmpresa();
         }
 
         if (source == mostrarPracticanteMayorPromedioButton) {
