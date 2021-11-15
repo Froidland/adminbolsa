@@ -75,4 +75,9 @@ public class PostulanteTitulado extends Postulante {
     public void mostrarPostulanteResumido() {
         System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut + " | Estado: Titulado");
     }
+
+    @Override
+    public boolean esPracticante() {
+        return false;
+    }
 }

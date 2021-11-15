@@ -126,13 +126,11 @@ public class VentanaPrincipal implements ActionListener {
         }
 
         if (source == modificarPuestoDeTrabajoButton) {
-            //new VentanaModificarPuestoDeTrabajo();
-            new VentanaImplementacionFaltante();
+            new VentanaSeleccionarPuestoDeTrabajo();
         }
 
         if (source == modificarPostulanteButton) {
-            //new VentanaModificarPostulante();
-            new VentanaImplementacionFaltante();
+            new VentanaSeleccionarPostulante();
         }
 
         if (source == modificarDatosEmpresaButton) {

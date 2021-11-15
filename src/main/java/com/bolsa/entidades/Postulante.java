@@ -137,4 +137,6 @@ public abstract class Postulante implements Seleccionable {
     public abstract String toString();
 
     public abstract void mostrarPostulanteResumido();
+
+    public abstract boolean esPracticante();
 }

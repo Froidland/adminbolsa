@@ -78,4 +78,9 @@ public class PostulantePracticante extends Postulante {
     public void mostrarPostulanteResumido() {
         System.out.println("Nombre: " + this.nombre + " | RUT: " + this.rut + " | Estado: Practicante");
     }
+
+    @Override
+    public boolean esPracticante() {
+        return true;
+    }
 }

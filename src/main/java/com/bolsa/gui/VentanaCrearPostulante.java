@@ -12,9 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VentanaCrearPostulante implements ActionListener, ItemListener {
@@ -32,15 +29,15 @@ public class VentanaCrearPostulante implements ActionListener, ItemListener {
     private final JTextField datoPromedioNotasTextField;
     private final JTextField datoAnosExperienciaTextField;
     private final JButton confirmarButton;
-    private final JCheckBox esPracticanteCheckBox;
+    private final JCheckBox datoEsPracticanteCheckBox;
 
     public VentanaCrearPostulante() {
         frame = new JFrame();
         panel = new JPanel();
 
         // CheckBox stuff
-        esPracticanteCheckBox = new JCheckBox("Es practicante?");
-        esPracticanteCheckBox.addItemListener(this);
+        datoEsPracticanteCheckBox = new JCheckBox("Es practicante?");
+        datoEsPracticanteCheckBox.addItemListener(this);
 
         // Button stuff
         confirmarButton = new JButton("Confirmar");
@@ -71,13 +68,10 @@ public class VentanaCrearPostulante implements ActionListener, ItemListener {
         // Panel stuff
         panel.setLayout(null);
 
-        // CheckBox panel stuff
-        panel.add(esPracticanteCheckBox).setBounds(10, 200, 150, 25);
+        panel.add(datoEsPracticanteCheckBox).setBounds(10, 200, 150, 25);
 
-        // Button panel stuff
         panel.add(confirmarButton).setBounds(70, 290, 165, 25);
 
-        // Labels panel stuff
         panel.add(datoNombreLabel).setBounds(10, 20, 120, 25);
         panel.add(datoFechaNacimientoLabel).setBounds(10, 50, 120, 25);
         panel.add(datoRutLabel).setBounds(10, 80, 120, 25);
@@ -87,7 +81,6 @@ public class VentanaCrearPostulante implements ActionListener, ItemListener {
         panel.add(datoPromedioNotasLabel).setBounds(10, 230, 120, 25);
         panel.add(datoAnosExperienciaLabel).setBounds(10, 260, 120, 25);
 
-        // TextField panel stuff
         panel.add(datoNombreTextField).setBounds(140, 20, 165, 25);
         panel.add(datoFechaNacimientoTextField).setBounds(140, 50, 165, 25);
         panel.add(datoRutTextField).setBounds(140, 80, 165, 25);
