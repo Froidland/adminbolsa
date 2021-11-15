@@ -109,7 +109,7 @@ public class VentanaModificarPostulante implements ActionListener, ItemListener 
         // Frame stuff
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setTitle("Crear postulante");
+        frame.setTitle("Modificar postulante");
         frame.setLocationRelativeTo(null);
         frame.setSize(329, 363);
         frame.setResizable(false);

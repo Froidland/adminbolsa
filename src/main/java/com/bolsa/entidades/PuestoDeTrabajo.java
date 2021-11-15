@@ -1,6 +1,7 @@
 package com.bolsa.entidades;
 
 import com.bolsa.Competencia;
+import com.bolsa.estructuras.ParPostulante;
 import com.bolsa.interfaces.Disponibilidad;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class PuestoDeTrabajo implements Disponibilidad {
         this.disponibilidad = false;
         this.competenciasRequeridas = new ArrayList<>();
         this.postulantes = new HashMap<>();
-        this.postulantesSeleccionados = new ArrayList<Postulante>();
+        this.postulantesSeleccionados = new ArrayList<>();
     }
 
     public UUID getUUID() {
@@ -126,6 +127,16 @@ public class PuestoDeTrabajo implements Disponibilidad {
             }
         }
         return null;
+    }
+
+    public ArrayList<ParPostulante> getParPostulantes() {
+        ArrayList<ParPostulante> postulantesLista = new ArrayList<>();
+
+        for (Map.Entry<String, Postulante> iterator : postulantes.entrySet()) {
+            postulantesLista.add(new ParPostulante(iterator.getValue().getNombre(), iterator.getValue().getRut()));
+        }
+
+        return postulantesLista;
     }
 
     /**

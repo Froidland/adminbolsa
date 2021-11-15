@@ -111,8 +111,7 @@ public class VentanaPrincipal implements ActionListener {
         }
 
         if (source == mostrarPostulantesButton) {
-            //new VentanaMostrarPostulantes();
-            new VentanaImplementacionFaltante();
+            new VentanaMostrarPostulantes();
         }
 
         if (source == eliminarPuestoDeTrabajoButton) {
