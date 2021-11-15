@@ -1,11 +1,13 @@
 package com.bolsa.gui;
 
-import com.bolsa.Main;
+import com.bolsa.Menu;
+import com.bolsa.Reporte;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class VentanaPrincipal implements ActionListener {
     private String name;
@@ -21,51 +23,40 @@ public class VentanaPrincipal implements ActionListener {
     private final JButton modificarPostulanteButton;
     private final JButton modificarDatosEmpresaButton;
     private final JButton mostrarPracticanteMayorPromedioButton;
+    private final JButton ejecutarMenuConsola;
+    private final JButton salirYGuardarReporte;
     private final JPanel panel;
+    boolean reporteExitoso = false;
 
     public VentanaPrincipal() {
         frame = new JFrame();
         panel = new JPanel();
 
-        // Boton crear puesto de trabajo
+        // Button stuff
         crearPuestoDeTrabajoButton = new JButton("Crear puesto de trabajo");
         crearPuestoDeTrabajoButton.addActionListener(this);
-
-        // Boton crear postulante
         crearPostulanteButton = new JButton("Crear postulante");
         crearPostulanteButton.addActionListener(this);
-
-        // Boton mostrar puestos de trabajo
         mostrarPuestosDeTrabajoButton = new JButton("Mostrar Puestos de trabajo");
         mostrarPuestosDeTrabajoButton.addActionListener(this);
-
-        // Boton mostrar postulantes
         mostrarPostulantesButton = new JButton("Mostrar Postulantes");
         mostrarPostulantesButton.addActionListener(this);
-
-        // Boton eliminar puesto de trabajo
         eliminarPuestoDeTrabajoButton = new JButton("Eliminar puesto de trabajo");
         eliminarPuestoDeTrabajoButton.addActionListener(this);
-
-        // Boton eliminar postulante
         eliminarPostulanteButton = new JButton("Eliminar postulante");
         eliminarPostulanteButton.addActionListener(this);
-
-        // Boton modificar puesto de trabajo
         modificarPuestoDeTrabajoButton = new JButton("Modificar puesto de trabajo");
         modificarPuestoDeTrabajoButton.addActionListener(this);
-
-        // Boton mmodificar postulante
         modificarPostulanteButton = new JButton("Modificar postulante");
         modificarPostulanteButton.addActionListener(this);
-
-        // Boton modificar datos empresa
         modificarDatosEmpresaButton = new JButton("Modificar datos empresa");
         modificarDatosEmpresaButton.addActionListener(this);
-
-        // Boton mostrar practicanto con el mayor promedio
         mostrarPracticanteMayorPromedioButton = new JButton("Mostrar practicante con mayor promedio");
         mostrarPracticanteMayorPromedioButton.addActionListener(this);
+        ejecutarMenuConsola = new JButton(("Ejecutar menu en consola"));
+        ejecutarMenuConsola.addActionListener(this);
+        salirYGuardarReporte = new JButton("Salir y guardar reporte");
+        salirYGuardarReporte.addActionListener(this);
 
         // Panel stuff
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
@@ -80,6 +71,8 @@ public class VentanaPrincipal implements ActionListener {
         panel.add(modificarPostulanteButton).setBounds(10, 230, 274, 25);
         panel.add(modificarDatosEmpresaButton).setBounds(10, 260, 274, 25);
         panel.add(mostrarPracticanteMayorPromedioButton).setBounds(10, 290, 274, 25);
+        panel.add(ejecutarMenuConsola).setBounds(10, 320, 274, 25);
+        panel.add(salirYGuardarReporte).setBounds(10, 350, 274, 25);
 
         // Frame stuff
         frame.add(panel, BorderLayout.CENTER);
@@ -139,6 +132,20 @@ public class VentanaPrincipal implements ActionListener {
         if (source == mostrarPracticanteMayorPromedioButton) {
             //new VentanaMostrarPracticanteMayorPromedio();
             new VentanaImplementacionFaltante();
+        }
+
+        if (source == ejecutarMenuConsola) {
+            frame.dispose();
+            Menu.runConsole();
+        }
+
+        if (source == salirYGuardarReporte) {
+            try {
+                reporteExitoso = Reporte.generarReporte();
+                frame.dispose();
+            } catch (IOException exception) {
+                new VentanaReporteFallido();
+            }
         }
     }
 }
